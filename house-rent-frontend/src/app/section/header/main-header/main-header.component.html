@@ -1,0 +1,126 @@
+<!-- Common Navbar Styles -->
+<nav
+  class="navbar navbar-expand-lg navbar-dark bg-gradient px-4"
+  [ngClass]="{
+    'bg-primary': !role,
+    'bg-success': role === 'USER',
+    'bg-dark': role === 'ADMIN'
+  }"
+>
+  <a class="navbar-brand fw-bold text-white" [routerLink]="['/home']">
+    <i class="bi bi-house-door-fill me-2"></i>RENT HOUSE
+  </a>
+
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-bs-toggle="collapse"
+    data-bs-target="#navbarNav"
+    aria-controls="navbarNav"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+    <!-- Left menu for different roles -->
+    <ul class="navbar-nav me-auto" *ngIf="role === 'USER'">
+      <li class="nav-item">
+        <a class="nav-link text-white" [routerLink]="['/home']">
+          <i class="bi bi-house-fill me-1"></i>Home
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" [routerLink]="['/post-property']">
+          <i class="bi bi-plus-square-fill me-1"></i>Post Property
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" [routerLink]="['/buy-package']">
+          <i class="bi bi-box-fill me-1"></i>Buy Package
+        </a>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav me-auto" *ngIf="role === 'ADMIN'">
+      <li class="nav-item">
+        <a class="nav-link text-white" [routerLink]="['/home']">
+          <i class="bi bi-speedometer2 me-1"></i>Dashboard
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" [routerLink]="['/user-list']">
+          <i class="bi bi-people-fill me-1"></i>Users
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" [routerLink]="['/buy-package']">
+          <i class="bi bi-boxes me-1"></i>Packages
+        </a>
+      </li>
+    </ul>
+
+    <!-- Right: If not logged in -->
+    <div *ngIf="!role" class="d-flex">
+      <a class="btn btn-outline-light" [routerLink]="['/login']">
+        <i class="bi bi-box-arrow-in-right me-1"></i>Login
+      </a>
+    </div>
+
+    <!-- Right: User/Admin Dropdown -->
+    <ul class="navbar-nav" *ngIf="role === 'USER' || role === 'ADMIN'">
+      <li class="nav-item dropdown">
+        <a
+          class="nav-link dropdown-toggle text-white d-flex align-items-center"
+          href="#"
+          id="userDropdown"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <img
+            [src]="user.avatarUrl || 'https://i.pravatar.cc/40'"
+            alt="Avatar"
+            width="30"
+            height="30"
+            class="rounded-circle me-2"
+          />
+          <span class="fw-semibold">{{ user.name }}</span>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li>
+            <a class="dropdown-item" [routerLink]="['/profile']">
+              <i class="bi bi-person-circle me-2"></i>Profile
+            </a>
+          </li>
+
+          <ng-container *ngIf="role === 'USER'">
+            <li>
+              <a class="dropdown-item" [routerLink]="['/my-property']">
+                <i class="bi bi-houses me-2"></i>My Properties
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['/unlock-property']">
+                <i class="bi bi-unlock me-2"></i>Unlock Property
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['/purchase-history']">
+                <i class="bi bi-receipt me-2"></i>Purchase History
+              </a>
+            </li>
+          </ng-container>
+
+          <li><hr class="dropdown-divider" /></li>
+          <li>
+            <a class="dropdown-item text-danger" (click)="logout()">
+              <i class="bi bi-box-arrow-right me-2"></i>Logout
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>

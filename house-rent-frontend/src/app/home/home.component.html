@@ -1,0 +1,64 @@
+<div class="container mt-4">
+    <div>
+        <h1 class="text-center mb-4">Explore Available Rental Properties That Match Your Lifestyle</h1>
+    </div>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col" *ngFor="let property of getAllPostedProperty">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">{{ property.title }}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{ property.category }}</h6>
+          <p class="card-text">{{ property.description }}</p>
+
+          <ul class="list-group list-group-flush mb-3">
+            <li class="list-group-item"><strong>Rent:</strong> {{ property.rentAmount }} BDT</li>
+            <li class="list-group-item">
+              <strong>Location:</strong> {{ property.section }}, {{ property.thana }}, {{ property.district }}, {{ property.division }}
+            </li>
+            <li class="list-group-item"><strong>Available From:</strong> {{ property.availableFrom }}</li>
+            <li class="list-group-item">
+              <strong>Status:</strong>
+              <span class="badge" [ngClass]="property.isAvailable ? 'bg-success' : 'bg-secondary'">
+                {{ property.isAvailable ? 'Available' : 'Not Available' }}
+              </span>
+            </li>
+          </ul>
+
+          <button class="btn btn-primary w-100" (click)="openModal(property)">View Details</button>
+        </div>
+        <div class="card-footer text-muted text-end">
+          Posted on {{ property.datePosted }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="propertyModal" tabindex="-1" aria-labelledby="propertyModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title" id="propertyModalLabel">{{ selectedProperty?.title }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Category:</strong> {{ selectedProperty?.category }}</p>
+        <p><strong>Description:</strong> {{ selectedProperty?.description }}</p>
+        <p><strong>Rent Amount:</strong> {{ selectedProperty?.rentAmount }} BDT</p>
+        <p><strong>Location:</strong> {{ selectedProperty?.section }}, {{ selectedProperty?.thana }}, {{ selectedProperty?.district }}, {{ selectedProperty?.division }}</p>
+        <p><strong>Available From:</strong> {{ selectedProperty?.availableFrom }}</p>
+        <p><strong>Status:</strong> 
+          <span class="badge" [ngClass]="selectedProperty?.isAvailable ? 'bg-success' : 'bg-secondary'">
+            {{ selectedProperty?.isAvailable ? 'Available' : 'Not Available' }}
+          </span>
+        </p>
+        <p><strong>Posted Date:</strong> {{ selectedProperty?.datePosted }}</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline-primary" (click)="unlockProperty()">Unlock</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
