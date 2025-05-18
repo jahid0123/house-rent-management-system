@@ -63,7 +63,8 @@ export class LoginComponent {
 
   onRegister(): void {
     if (this.registerForm.valid) {
-      const { name, email, password, confirmPassword } = this.registerForm.value;
+      const { name, email, password, confirmPassword } =
+        this.registerForm.value;
       if (password !== confirmPassword) {
         alert('Passwords do not match');
         return;
@@ -72,7 +73,7 @@ export class LoginComponent {
       this.authService.register({ name, email, password }).subscribe({
         next: () => {
           alert('Registration successful');
-
+          this.router.navigateByUrl('/home');
           // Close modal
           const modalEl = document.getElementById('registerModal');
           if (modalEl) {
@@ -81,7 +82,7 @@ export class LoginComponent {
           }
 
           // Redirect to login
-          this.router.navigate(['/login']);
+          this.router.navigateByUrl('/home');
         },
         error: () => {
           alert('Registration failed');

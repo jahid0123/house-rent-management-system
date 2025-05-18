@@ -1,8 +1,14 @@
 package com.jmjbrothers.spring.securtiy.authentication.controller;
 
+import com.jmjbrothers.spring.securtiy.authentication.dto.GetPostedProperty;
+import com.jmjbrothers.spring.securtiy.authentication.dto.MyPostPropertyResponseDto;
+import com.jmjbrothers.spring.securtiy.authentication.dto.PostedPropertyResponseDto;
+import com.jmjbrothers.spring.securtiy.authentication.dto.PropertyPostUpdateDto;
 import com.jmjbrothers.spring.securtiy.authentication.model.CreditPackage;
+import com.jmjbrothers.spring.securtiy.authentication.model.PropertyPost;
 import com.jmjbrothers.spring.securtiy.authentication.model.User;
 import com.jmjbrothers.spring.securtiy.authentication.service.CreditPackageService;
+import com.jmjbrothers.spring.securtiy.authentication.service.PropertyPostService;
 import com.jmjbrothers.spring.securtiy.authentication.service.UserInfoDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +26,7 @@ public class AdminController {
 
     private final UserInfoDetailsService userInfoDetailsService;
     private final CreditPackageService packageService;
-
+    private final PropertyPostService propertyPostService;
     private final CreditPackageService creditPackageService;
 
 
@@ -57,6 +63,21 @@ public class AdminController {
         String deletePackage = creditPackageService.deletePackageById(id);
 
         return new ResponseEntity<>(deletePackage, HttpStatus.OK);
+    }
+
+
+    @GetMapping("/all/posted/property")
+    public ResponseEntity<?> getAllPostedProperty() {
+
+        List<PostedPropertyResponseDto> allProperty = propertyPostService.allPostedProperty();
+        return ResponseEntity.ok(allProperty);
+    }
+
+    @PutMapping("/update/posted/property")
+    public ResponseEntity<?> updatePostedProperty(@RequestBody PropertyPostUpdateDto post) {
+
+        PropertyPost allProperty = propertyPostService.updatePostedProperty(post);
+        return ResponseEntity.ok(allProperty);
     }
 
 }

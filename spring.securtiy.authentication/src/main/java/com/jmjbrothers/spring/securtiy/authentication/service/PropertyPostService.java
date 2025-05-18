@@ -1,9 +1,6 @@
 package com.jmjbrothers.spring.securtiy.authentication.service;
 
-import com.jmjbrothers.spring.securtiy.authentication.dto.GetPostedProperty;
-import com.jmjbrothers.spring.securtiy.authentication.dto.MyPostPropertyResponseDto;
-import com.jmjbrothers.spring.securtiy.authentication.dto.PropertyPostDto;
-import com.jmjbrothers.spring.securtiy.authentication.dto.UpdateMyPostedPropertyDto;
+import com.jmjbrothers.spring.securtiy.authentication.dto.*;
 import com.jmjbrothers.spring.securtiy.authentication.model.Property;
 import com.jmjbrothers.spring.securtiy.authentication.model.PropertyPost;
 import com.jmjbrothers.spring.securtiy.authentication.model.User;
@@ -196,5 +193,49 @@ public class PropertyPostService {
 
 
         return myPostPropertyResponseDto(propertyPostRepository.save(propertyPost));
+    }
+
+
+    @Transactional
+    public List<PostedPropertyResponseDto> allPostedProperty() {
+        List<PropertyPost> propertyPosts = propertyPostRepository.findAll();
+        List<PostedPropertyResponseDto> myAllProperty = propertyPosts.stream().map(this::postedPropertyResponseDto).collect(Collectors.toList());
+        return myAllProperty;
+    }
+
+    private PostedPropertyResponseDto  postedPropertyResponseDto (PropertyPost propertyPost){
+        PostedPropertyResponseDto myPost = new PostedPropertyResponseDto();
+        myPost.setPostId(propertyPost.getId());
+        myPost.setUserId(propertyPost.getUser().getId());
+        myPost.setContactNumber(propertyPost.getContactNumber());
+        myPost.setContactPerson(propertyPost.getContactPerson());
+        myPost.setArea(propertyPost.getArea());
+        myPost.setAvailableFrom(propertyPost.getAvailableFrom());
+        myPost.setCategory(propertyPost.getProperty().getCategory());
+        myPost.setTitle(propertyPost.getProperty().getTitle());
+        myPost.setDescription(propertyPost.getProperty().getDescription());
+        myPost.setIsAvailable(propertyPost.getProperty().getIsAvailable());
+        myPost.setRentAmount(propertyPost.getProperty().getRentAmount());
+        myPost.setDatePosted(propertyPost.getProperty().getDatePosted());
+        myPost.setDivision(propertyPost.getProperty().getDivision());
+        myPost.setDistrict(propertyPost.getProperty().getDistrict());
+        myPost.setThana(propertyPost.getProperty().getThana());
+        myPost.setSection(propertyPost.getProperty().getSection());
+        myPost.setRoadNumber(propertyPost.getProperty().getRoadNumber());
+        myPost.setHouseNumber(propertyPost.getProperty().getHouseNumber());
+        myPost.setAddress(propertyPost.getProperty().getAddress());
+
+        return myPost;
+    }
+
+    @Transactional
+    public PropertyPost updatePostedProperty(PropertyPostUpdateDto post) {
+
+        PropertyPost propertyPost = propertyPostRepository.findById(post.getPostId()).orElse(null);
+        Property property = propertyPost.getProperty();
+        property.setIsAvailable(post.getIsAvailable());
+        propertyPost.setProperty(property);
+        return propertyPostRepository.save(propertyPost);
+
     }
 }

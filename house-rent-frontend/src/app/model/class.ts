@@ -129,5 +129,37 @@ export interface AddCreditPackage {
 
 
 
+export interface User {
+  id: number;
+  name: string;
+  email: string;
+  role: string;
+  phone: string;
+  balanceCredits: number;
+  createdAt: string; // use string for LocalDateTime when coming from backend
+}
+
+
+export interface RentPost {
+  postId: number;
+  userId: number;
+  contactNumber: string;
+  contactPerson: string;
+  area: string;
+  availableFrom: string; // ISO Date (e.g., "2025-06-01")
+  category: string;      // e.g., "SUBLET"
+  title: string;
+  description: string;
+  isAvailable: boolean;
+  rentAmount: number;
+  datePosted: string;    // ISO Date (e.g., "2025-05-15")
+  division: string;
+  district: string;
+  thana: string;
+  section: string;
+  roadNumber: string;
+  houseNumber: string;
+  address: string;
+}
 
 
