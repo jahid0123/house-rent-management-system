@@ -1,1 +1,138 @@
-<p>unlock-property works!</p>
+<h2 class="container mt-5 text-center fw-bold text-primary">🔓 Unlocked Property List</h2>
+
+<div class="container mt-4">
+  <div class="table-responsive shadow p-3 mb-5 bg-white rounded-4">
+    <table class="table table-hover align-middle text-center">
+      <thead class="table-dark text-white">
+        <tr>
+          <th scope="col">Post Id</th>
+          <th scope="col">Title</th>
+          <th scope="col">Category</th>
+          <th scope="col">Rent (৳)</th>
+          <th scope="col">Available From</th>
+          <th scope="col">Posted Date</th>
+          <th scope="col">Contact Info</th>
+          <th scope="col">Location</th>
+          <th scope="col">Credits Used</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let post of unlockedPosts; let i = index">
+          <td>{{ post.postId }}</td>
+          <td>
+            <i class="bi bi-house-door-fill text-primary me-1"></i> 
+            {{ post.title }}
+          </td>
+          <td>
+            <span class="badge bg-info text-dark">{{ post.category }}</span>
+          </td>
+          <td>
+            <strong class="text-success">৳{{ post.rentAmount }}</strong>
+          </td>
+          <td>{{ post.availableFrom | date }}</td>
+          <td>{{ post.adPostedDate | date }}</td>
+          <td class="text-start">
+            <div><i class="bi bi-person-circle me-1 text-primary"></i> {{ post.contactPerson }}</div>
+            <div><i class="bi bi-telephone-fill me-1 text-success"></i> {{ post.contactNumber }}</div>
+          </td>
+          <td>
+            <div>{{ post.section }}, Rd: {{ post.roadNumber }}, H: {{ post.houseNumber }}</div>
+            <div>{{ post.thana }}, {{ post.district }}, {{ post.division }}</div>
+          </td>
+          <td>
+            <span class="badge bg-warning text-dark">{{ post.creditsUsed }}</span>
+          </td>
+          <td>
+            <button class="btn btn-outline-primary btn-sm rounded-pill px-3"
+                    (click)="viewDetails(post)">
+              <i class="bi bi-eye-fill me-1"></i> View Details
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade show d-block" tabindex="-1" role="dialog"
+     *ngIf="showModal" style="background-color: rgba(0,0,0,0.5);">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content border-0 rounded-4 shadow-lg">
+      <div class="modal-header bg-success text-white rounded-top-4">
+        <h5 class="modal-title fw-semibold">
+          <i class="bi bi-house-fill me-2"></i>Unlocked Property Details
+        </h5>
+        <button type="button" class="btn-close btn-close-white" (click)="closeModal()"></button>
+      </div>
+      <div class="modal-body px-4 py-3">
+        <div *ngIf="selectedPost" class="row gy-3">
+
+          <!-- Title & Category -->
+          <div class="col-md-6">
+            <i class="bi bi-tag-fill text-info me-2"></i>
+            <strong>Title:</strong> {{ selectedPost.title }}
+          </div>
+          <div class="col-md-4">
+            <span class="badge bg-info text-dark"><i class="bi bi-grid-3x3-gap-fill me-1"></i>Category: {{ selectedPost.category }}</span>
+          </div>
+
+          <!-- Rent & Available From -->
+          <div class="col-md-6">
+            <i class="bi bi-cash-coin text-success me-2"></i>
+            <strong>Rent:</strong> ৳{{ selectedPost.rentAmount }}
+          </div>
+          <div class="col-md-6">
+            <i class="bi bi-calendar-check-fill text-warning me-2"></i>
+            <strong>Available From:</strong> {{ selectedPost.availableFrom | date:'longDate' }}
+          </div>
+
+          <!-- Description -->
+          <div class="col-12">
+            <i class="bi bi-card-text text-secondary me-2"></i>
+            <strong>Description:</strong>
+            <p class="mt-1 ms-4">{{ selectedPost.description }}</p>
+          </div>
+
+          <!-- Contact Info -->
+          <div class="col-md-6">
+            <i class="bi bi-person-fill text-primary me-2"></i>
+            <strong>Contact Person:</strong> {{ selectedPost.contactPerson }}
+          </div>
+          <div class="col-md-6">
+            <i class="bi bi-telephone-fill text-success me-2"></i>
+            <strong>Contact Number:</strong> {{ selectedPost.contactNumber }}
+          </div>
+
+          <!-- Location -->
+          <div class="col-12">
+            <i class="bi bi-geo-alt-fill text-danger me-2"></i>
+            <strong>Property Address:</strong>
+            <p class="mt-1 ms-4">
+             House: {{ selectedPost.houseNumber }}, Road: {{ selectedPost.roadNumber }}, Section: {{ selectedPost.section }}<br>
+              {{ selectedPost.thana }}, {{ selectedPost.district }}, {{ selectedPost.division }}
+            </p>
+          </div>
+
+          <!-- Posted Date & Credits -->
+          <div class="col-md-6">
+            <i class="bi bi-calendar-event-fill text-secondary me-2"></i>
+            <strong>Posted On:</strong> {{ selectedPost.adPostedDate | date:'mediumDate' }}
+          </div>
+          <div class="col-md-6">
+            <i class="bi bi-stars text-warning me-2"></i>
+            <strong>Credits Used:</strong>
+            <span class="badge bg-warning text-dark">{{ selectedPost.creditsUsed }}</span>
+          </div>
+
+        </div>
+      </div>
+      <div class="modal-footer bg-light rounded-bottom-4">
+        <button class="btn btn-secondary rounded-pill px-4" (click)="closeModal()">
+          <i class="bi bi-x-circle-fill me-1"></i> Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

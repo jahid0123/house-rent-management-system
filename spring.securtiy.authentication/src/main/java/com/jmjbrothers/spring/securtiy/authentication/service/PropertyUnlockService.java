@@ -1,6 +1,8 @@
 package com.jmjbrothers.spring.securtiy.authentication.service;
 
 
+import com.jmjbrothers.spring.securtiy.authentication.dto.MyPostPropertyResponseDto;
+import com.jmjbrothers.spring.securtiy.authentication.dto.MyUnlockPropertyDto;
 import com.jmjbrothers.spring.securtiy.authentication.dto.PropertyUnlockDto;
 import com.jmjbrothers.spring.securtiy.authentication.model.PropertyPost;
 import com.jmjbrothers.spring.securtiy.authentication.model.PropertyUnlock;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -51,10 +54,40 @@ public class PropertyUnlockService {
     }
 
     @Transactional
-    public List<PropertyUnlock> allPropertyUnlockById(Long id) {
+    public List<MyUnlockPropertyDto> allPropertyUnlockById(Long id) {
         List<PropertyUnlock> allPropertyUnlock = propertyUnlockRepository.findAllByUserId(id);
 
-        return allPropertyUnlock;
+        List<MyUnlockPropertyDto> getAllUnlockPropertyByMe = allPropertyUnlock.stream().map(this::unlockPropertyDto).collect(Collectors.toList());
+        return getAllUnlockPropertyByMe;
+    }
+
+    private MyUnlockPropertyDto unlockPropertyDto(PropertyUnlock propertyUnlock) {
+
+        MyUnlockPropertyDto propertyUnlockDto = new MyUnlockPropertyDto();
+        propertyUnlockDto.setUnlockId(propertyUnlock.getId());
+        propertyUnlockDto.setPostId(propertyUnlock.getPropertyPost().getId());
+        propertyUnlockDto.setCreditsUsed(propertyUnlock.getCreditsUsed());
+        propertyUnlockDto.setDateUnlocked(propertyUnlock.getDateUnlocked());
+        propertyUnlockDto.setContactPerson(propertyUnlock.getPropertyPost().getContactPerson());
+        propertyUnlockDto.setContactNumber(propertyUnlock.getPropertyPost().getContactNumber());
+        propertyUnlockDto.setArea(propertyUnlock.getPropertyPost().getArea());
+        propertyUnlockDto.setAvailableFrom(propertyUnlock.getPropertyPost().getAvailableFrom());
+        propertyUnlockDto.setCategory(propertyUnlock.getPropertyPost().getProperty().getCategory());
+        propertyUnlockDto.setTitle(propertyUnlock.getPropertyPost().getProperty().getTitle());
+        propertyUnlockDto.setDescription(propertyUnlock.getPropertyPost().getProperty().getDescription());
+        propertyUnlockDto.setIsAvailable(propertyUnlock.getPropertyPost().getProperty().getIsAvailable());
+        propertyUnlockDto.setRentAmount(propertyUnlock.getPropertyPost().getProperty().getRentAmount());
+        propertyUnlockDto.setAdPostedDate(propertyUnlock.getPropertyPost().getDatePosted());
+        propertyUnlockDto.setDivision(propertyUnlock.getPropertyPost().getProperty().getDivision());
+        propertyUnlockDto.setDistrict(propertyUnlock.getPropertyPost().getProperty().getDistrict());
+        propertyUnlockDto.setThana(propertyUnlock.getPropertyPost().getProperty().getThana());
+        propertyUnlockDto.setSection(propertyUnlock.getPropertyPost().getProperty().getSection());
+        propertyUnlockDto.setAddress(propertyUnlock.getPropertyPost().getProperty().getAddress());
+        propertyUnlockDto.setRoadNumber(propertyUnlock.getPropertyPost().getProperty().getRoadNumber());
+        propertyUnlockDto.setHouseNumber(propertyUnlock.getPropertyPost().getProperty().getHouseNumber());
+
+        return propertyUnlockDto;
+
     }
 }
 

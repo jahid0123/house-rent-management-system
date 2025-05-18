@@ -88,5 +88,30 @@ export interface UpdateMyPostedProperty {
   address: string;
 }
 
+export interface UnlockedPost {
+  unlockId: number;
+  postId: number;
+  creditsUsed: number;
+  dateUnlocked: string;
+  contactNumber: string;
+  contactPerson: string;
+  area: string;
+  availableFrom: string; // ISO Date
+  category: string;
+  title: string;
+  description: string;
+  isAvailable: boolean;
+  rentAmount: number;
+  adPostedDate: string; // ISO Date
+  division: string;
+  district: string;
+  thana: string;
+  section: string;
+  roadNumber: string;
+  houseNumber: string;
+  address: string;
+}
+
+
 
 

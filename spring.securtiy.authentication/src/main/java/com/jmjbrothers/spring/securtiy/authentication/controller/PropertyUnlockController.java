@@ -1,6 +1,7 @@
 package com.jmjbrothers.spring.securtiy.authentication.controller;
 
 
+import com.jmjbrothers.spring.securtiy.authentication.dto.MyUnlockPropertyDto;
 import com.jmjbrothers.spring.securtiy.authentication.dto.PropertyUnlockDto;
 import com.jmjbrothers.spring.securtiy.authentication.model.PropertyUnlock;
 import com.jmjbrothers.spring.securtiy.authentication.service.PropertyUnlockService;
@@ -27,8 +28,8 @@ public class PropertyUnlockController {
     }
 
     @GetMapping("/property/unlock/me")
-    public ResponseEntity<?> allPropertyUnlockById(@RequestParam Long id){
-        List<PropertyUnlock> allPropertyUnlockEachUser = propertyUnlockService.allPropertyUnlockById(id);
+    public ResponseEntity<?> getAllPropertyUnlockById(@RequestParam Long id){
+        List<MyUnlockPropertyDto> allPropertyUnlockEachUser = propertyUnlockService.allPropertyUnlockById(id);
         if (allPropertyUnlockEachUser == null){
             return ResponseEntity.badRequest().body("No unlock property yet");
         }
