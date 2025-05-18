@@ -1,6 +1,5 @@
 package com.jmjbrothers.spring.securtiy.authentication.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.jmjbrothers.spring.securtiy.authentication.constants.Category;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -11,19 +10,17 @@ import java.time.LocalDate;
 
 @Data
 @RequiredArgsConstructor
-public class PropertyPostDto {
+public class UpdateMyPostedPropertyDto {
 
-    private Long userID;
+    private Long postId;
+    private String contactNumber;
+    private String contactPerson;
+    private String area;
+    private LocalDate availableFrom;
     @Enumerated(value = EnumType.STRING)
     private Category category;
     private String title;
     private String description;
-    private String address;
-    private String contactPerson;
-    private String contactNumber;
-    private String area;
-    @JsonFormat(pattern = "yyyy-MM-dd") // ADD THIS
-    private LocalDate availableFrom;
     private Integer rentAmount;
     private String division;
     private String district;
@@ -31,7 +28,5 @@ public class PropertyPostDto {
     private String section;
     private String roadNumber;
     private String houseNumber;
-
-
-
+    private String address;
 }

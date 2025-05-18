@@ -1,12 +1,13 @@
 package com.jmjbrothers.spring.securtiy.authentication.service;
 
 import com.jmjbrothers.spring.securtiy.authentication.constants.Role;
-import com.jmjbrothers.spring.securtiy.authentication.dto.RegisterRequest;
+import com.jmjbrothers.spring.securtiy.authentication.dto.*;
 import com.jmjbrothers.spring.securtiy.authentication.model.User;
 import com.jmjbrothers.spring.securtiy.authentication.model.UserInfoDetails;
 import com.jmjbrothers.spring.securtiy.authentication.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -72,4 +73,61 @@ public class UserInfoDetailsService implements UserDetailsService {
     public User userFindById(Long id){
         return userRepository.findById(id).orElse(null);
     }
+
+    @Transactional
+    public UserResponseDto getUserById(Long id) {
+
+        User user = userRepository.findById(id).orElseThrow(
+                ()-> new UsernameNotFoundException("User not found with this id: "+id));
+
+        UserResponseDto userResponseDto = new UserResponseDto();
+        userResponseDto.setName(user.getName());
+        userResponseDto.setEmail(user.getEmail());
+        userResponseDto.setPhone(user.getPhone());
+        userResponseDto.setCreditBalance(user.getBalanceCredits());
+
+        return userResponseDto;
+    }
+
+    @Transactional
+    public ResponseEntity<?> editUserInfoById(UserEditDto userEditDto) {
+        User user = userRepository.findById(userEditDto.getUserId()).orElseThrow(
+                ()-> new UsernameNotFoundException("user not found with the id "+userEditDto.getUserId()));
+        if (user != null){
+            user.setName(userEditDto.getName());
+            user.setPhone(userEditDto.getPhone());
+
+            userRepository.save(user);
+
+            return ResponseEntity.ok("User updated successfully");
+        }else {
+            return ResponseEntity.ok("User not updated!!!");
+        }
+    }
+
+    @Transactional
+    public void changePassword(Long userId, String oldPassword, String newPassword) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
+        if (!passwordEncoder.matches(oldPassword, user.getPassword())) {
+            throw new IllegalArgumentException("Old password is incorrect");
+        }
+
+        user.setPassword(passwordEncoder.encode(newPassword));
+        userRepository.save(user);
+    }
+
+/*    public void changePassword(PasswordChangeRequestDto request) {
+
+        User user = userRepository.findById(request.getUserId())
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
+        if (!passwordEncoder.matches(request.getOldPassword(), user.getPassword())) {
+            throw new IllegalArgumentException("Old password is incorrect");
+        }
+
+        user.setPassword(passwordEncoder.encode(request.getNewPassword()));
+        userRepository.save(user);
+    }*/
 }

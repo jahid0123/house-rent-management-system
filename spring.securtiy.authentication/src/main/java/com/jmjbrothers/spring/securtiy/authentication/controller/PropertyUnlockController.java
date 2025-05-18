@@ -26,8 +26,8 @@ public class PropertyUnlockController {
         return new ResponseEntity<>(propertyUnlock, HttpStatus.OK);
     }
 
-    @GetMapping("/property/unlock/{id}")
-    public ResponseEntity<?> allPropertyUnlockById(@PathVariable Long id){
+    @GetMapping("/property/unlock/me")
+    public ResponseEntity<?> allPropertyUnlockById(@RequestParam Long id){
         List<PropertyUnlock> allPropertyUnlockEachUser = propertyUnlockService.allPropertyUnlockById(id);
         if (allPropertyUnlockEachUser == null){
             return ResponseEntity.badRequest().body("No unlock property yet");

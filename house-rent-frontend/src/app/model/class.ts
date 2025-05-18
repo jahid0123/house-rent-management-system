@@ -47,3 +47,46 @@ export interface Property {
 }
 
 
+export interface MyPostedProperty {
+  id: number;
+  contactNumber: string;
+  contactPerson: string;
+  area: string;
+  availableFrom: Date;
+  category: string;
+  title: string;
+  description: string;
+  isAvailable: boolean;
+  rentAmount: number;
+  datePosted: Date;
+  division: string;
+  district: string;
+  thana: string;
+  section: string;
+  roadNumber: string;
+  houseNumber: string;
+  address: string;
+}
+
+
+export interface UpdateMyPostedProperty {
+  postId: number;
+  contactNumber: string;
+  contactPerson: string;
+  area: string;
+  availableFrom: Date; // or Date if you're handling it as Date in Angular
+  category: string; // adjust based on your actual Category enum
+  title: string;
+  description: string;
+  rentAmount: number;
+  division: string;
+  district: string;
+  thana: string;
+  section: string;
+  roadNumber: string;
+  houseNumber: string;
+  address: string;
+}
+
+
+

@@ -52,7 +52,7 @@ public class PropertyUnlockService {
 
     @Transactional
     public List<PropertyUnlock> allPropertyUnlockById(Long id) {
-        List<PropertyUnlock> allPropertyUnlock = propertyUnlockRepository.findAllById(Collections.singleton(id));
+        List<PropertyUnlock> allPropertyUnlock = propertyUnlockRepository.findAllByUserId(id);
 
         return allPropertyUnlock;
     }

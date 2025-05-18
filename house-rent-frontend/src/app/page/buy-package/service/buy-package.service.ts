@@ -9,11 +9,16 @@ import { GetAllCreditPackage } from '../../../model/class';
 })
 export class BuyPackageService {
 
-  private buyPackageURL = 'http://localhost:8080/api/user/all/credit/package';
+  private getPackageURL = 'http://localhost:8080/api/user/all/credit/package';
+  private buyPackageUrl = 'http://localhost:8080/api/user/buy/package'
 
   constructor(private http: HttpClient, private router: Router) { }
 
   getAllPackages(): Observable<GetAllCreditPackage[]>{
-    return this.http.get<GetAllCreditPackage[]>(this.buyPackageURL);
+    return this.http.get<GetAllCreditPackage[]>(this.getPackageURL);
+  }
+
+  buyPackage(data: {userId: number; creditPackageId: number}): Observable<any>{
+    return this.http.post<any>(this.buyPackageUrl, data);
   }
 }

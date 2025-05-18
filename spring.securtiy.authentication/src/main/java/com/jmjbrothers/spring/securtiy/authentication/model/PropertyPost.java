@@ -27,11 +27,11 @@ public class PropertyPost {
     @Column(name = "contact_number", nullable = false)
     private String contactNumber;
 
-    @Column(name = "rent_area", nullable = false)
-    private String area;
-
     @Column(name = "contact_person", nullable = false)
     private String contactPerson;
+
+    @Column(name = "rent_area", nullable = false)
+    private String area;
 
     @Column(name = "available_from", nullable = false)
     private LocalDate availableFrom;
@@ -40,12 +40,12 @@ public class PropertyPost {
     private Integer creditsUsed = 10;
 
     @Column(name = "date_posted", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private LocalDateTime datePosted;
+    private LocalDate datePosted;
 
     @PrePersist
     public void prePersist() {
         if (datePosted == null) {
-            datePosted = LocalDateTime.now();
+            datePosted = LocalDate.now();
         }
     }
 

@@ -1,16 +1,18 @@
 package com.jmjbrothers.spring.securtiy.authentication.controller;
 
+import com.jmjbrothers.spring.securtiy.authentication.dto.PasswordChangeRequestDto;
+import com.jmjbrothers.spring.securtiy.authentication.dto.UserEditDto;
+import com.jmjbrothers.spring.securtiy.authentication.dto.UserResponseDto;
 import com.jmjbrothers.spring.securtiy.authentication.model.CreditPackage;
 import com.jmjbrothers.spring.securtiy.authentication.service.CreditPackageService;
 import com.jmjbrothers.spring.securtiy.authentication.service.UserInfoDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController
@@ -27,4 +29,44 @@ public class UserController {
         List<CreditPackage> creditPackage= creditPackageService.allCreditPackage();
         return new ResponseEntity<>(creditPackage, HttpStatus.OK);
     }
+
+    @GetMapping("/info")
+    public ResponseEntity<UserResponseDto> getUserById(@RequestParam Long userId){
+        UserResponseDto userResponseDto = userInfoDetailsService.getUserById(userId);
+        return ResponseEntity.ok(userResponseDto);
+
+    }
+
+
+    @PutMapping("/change-password")
+    public ResponseEntity<?> changePassword(@RequestBody PasswordChangeRequestDto request) {
+        if (request.getCurrentPassword() == null || request.getNewPassword() == null) {
+            return ResponseEntity.badRequest().body("Password fields cannot be null");
+        }
+
+        userInfoDetailsService.changePassword(request.getUserId(), request.getCurrentPassword(), request.getNewPassword());
+        return ResponseEntity.ok("Password changed successfully");
+    }
+    /*@PutMapping("/change-password")
+    public ResponseEntity<?> changePassword(@RequestBody PasswordChangeRequestDto request) {
+        userInfoDetailsService.changePassword(request);
+        return ResponseEntity.ok("Password changed successfully.");
+    }*/
+
+/*    @GetMapping("/api/user/info")
+    public ResponseEntity<UserResponseDto> getUserById(@RequestParam Long userId){
+        UserResponseDto userResponseDto = userInfoDetailsService.getUserById(new GetUserInfoDto(userId));
+        return ResponseEntity.ok(userResponseDto);
+    }*/
+
+    @PutMapping("/edit")
+    public ResponseEntity<?> editUserById(@RequestBody UserEditDto userEditDto){
+        userInfoDetailsService.editUserInfoById(userEditDto);
+
+        return ResponseEntity.ok(Map.of("message", "Profile updated successfully!"));
+    }
+
+
+
+
 }

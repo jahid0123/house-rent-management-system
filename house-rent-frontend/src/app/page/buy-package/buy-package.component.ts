@@ -33,10 +33,27 @@ export class BuyPackageComponent implements OnInit {
       });
     }
 
-    buyPackage(packageId: number): void {
-      const userId = Number(localStorage.getItem('id'));
-      
+    buyPackage(creditPackageId: number): void {
+  const userId = Number(localStorage.getItem('id'));
+
+  if (confirm('Are you sure you want to buy this package?')) {
+    const buyPackage = {
+      userId,
+      creditPackageId
+    };
+
+    this.buyPackageService.buyPackage(buyPackage).subscribe({
+      next: (res) => {
+        alert('Package purchased successfully.');
+        this.router.navigateByUrl('/profile');
+      },
+      error: (err) => {
+        alert('Purchase request failed!!');
+      }
+    });
   }
+}
+
 
 
 }

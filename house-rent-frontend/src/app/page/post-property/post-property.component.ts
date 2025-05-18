@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Property } from '../../model/class';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NgFor } from '@angular/common';
+import { PostPropertyService } from './service/post-property.service';
 
 @Component({
   selector: 'app-post-property',
@@ -12,10 +13,10 @@ import { NgFor } from '@angular/common';
 export class PostPropertyComponent implements OnInit {
   propertyForm!: FormGroup;
   selectedFiles: File[] = [];
-    previewUrls: string[] = [];
-  categories = ['FAMILY', 'BACHELOR', 'SUBLET']; // Example values
+  previewUrls: string[] = [];
+  categories = ['FAMILY', 'BACHELOR', 'SUBLET', 'ROOMMATE', 'SHOP', 'OFFICE', 'HOUSE']; // Example values
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private postService: PostPropertyService) {}
 
   ngOnInit(): void {
     this.propertyForm = this.fb.group({
@@ -62,18 +63,34 @@ export class PostPropertyComponent implements OnInit {
   // }
 
   onSubmit(): void {
+
+    const userID = Number(localStorage.getItem('id'));
+
     const formData = new FormData();
-    const formValue = this.propertyForm.value;
 
-    for (const file of this.selectedFiles) {
-      formData.append('images', file);
-    }
+    if(this.propertyForm.valid){
+      const { 
+        title, category, description, address,
+        contactPerson, contactNumber, area , availableFrom ,
+        rentAmount, division, district, thana, section, roadNumber, houseNumber} = this.propertyForm.value;
 
-    for (const key in formValue) {
-      formData.append(key, formValue[key]);
-    }
+      const propertyPostData = {
+        userID, title, category, description, address,
+        contactPerson, contactNumber, area , availableFrom ,
+        rentAmount, division, district, thana, section, roadNumber, houseNumber,
+    };    
 
-    // TODO: Submit formData to backend using HttpClient
-    console.log('Form submitted with:', formValue);
+    this.postService.postProperty(propertyPostData).subscribe({
+      next: (res) => {
+        alert(res);
+        this.propertyForm.reset();
+      },
+      error: (err) => {
+        alert(err.error.message || 'Failed to post property');
+      }
+    });
   }
+  
+  }
+
 }
