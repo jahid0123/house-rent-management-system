@@ -120,6 +120,14 @@ export interface MyPurchasePackageHistory {
   datePurchased: Date;
 }
 
+export interface AddCreditPackage {
+  id: number;
+  name: string;
+  creditAmount: number;
+  price: number; // Use number for BigDecimal in Angular
+}
+
+
 
 
 

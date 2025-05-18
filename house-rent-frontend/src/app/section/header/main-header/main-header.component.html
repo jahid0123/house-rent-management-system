@@ -45,18 +45,23 @@
 
     <ul class="navbar-nav me-auto" *ngIf="role === 'ADMIN'">
       <li class="nav-item">
-        <a class="nav-link text-white" [routerLink]="['/home']">
+        <a class="nav-link text-white" [routerLink]="['/dashboard']">
           <i class="bi bi-speedometer2 me-1"></i>Dashboard
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-white" [routerLink]="['/user-list']">
-          <i class="bi bi-people-fill me-1"></i>Users
+        <a class="nav-link text-white" [routerLink]="['/manage-user']">
+          <i class="bi bi-people-fill me-1"></i>Manage Users
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-white" [routerLink]="['/buy-package']">
-          <i class="bi bi-boxes me-1"></i>Packages
+        <a class="nav-link text-white" [routerLink]="['/manage-packages']">
+          <i class="bi bi-boxes me-1"></i>Manage Packages
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" [routerLink]="['/manage-post']">
+          <i class="bi bi-file-post me-1"></i>Manage Post
         </a>
       </li>
     </ul>

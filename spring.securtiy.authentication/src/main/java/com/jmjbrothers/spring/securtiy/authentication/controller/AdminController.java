@@ -21,6 +21,8 @@ public class AdminController {
     private final UserInfoDetailsService userInfoDetailsService;
     private final CreditPackageService packageService;
 
+    private final CreditPackageService creditPackageService;
+
 
     //Get all user access control by Admin
     @GetMapping("/alluser")
@@ -29,16 +31,32 @@ public class AdminController {
     }
 
     //Delete user by id access control by admin
-    @DeleteMapping("/delete/{id}")
-    public String deleteUserById(@PathVariable Long id) {
+    @DeleteMapping("/delete/user")
+    public String deleteUserById(@RequestParam Long id) {
         return userInfoDetailsService.deleteUserById(id);
     }
 
     //Credit Package Creation by the Admin
-    @PostMapping("/add/creditpackage")
+    @PostMapping("/add/package")
     public ResponseEntity<?> addCreditPackage(@RequestBody CreditPackage cPackage) {
         CreditPackage creditPackage = packageService.addCreditPackage(cPackage);
         return new ResponseEntity<>(creditPackage, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/edit/package")
+    public ResponseEntity<?> updatePackage(@RequestBody CreditPackage editBody){
+
+        CreditPackage creditPackage = creditPackageService.updatePackage(editBody);
+
+        return new ResponseEntity<>(creditPackage, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete/package")
+    public ResponseEntity<?> deletePackage(@RequestParam Long id){
+
+        String deletePackage = creditPackageService.deletePackageById(id);
+
+        return new ResponseEntity<>(deletePackage, HttpStatus.OK);
     }
 
 }

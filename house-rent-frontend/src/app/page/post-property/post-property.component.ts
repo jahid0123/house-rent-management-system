@@ -3,6 +3,7 @@ import { Property } from '../../model/class';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NgFor } from '@angular/common';
 import { PostPropertyService } from './service/post-property.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-post-property',
@@ -16,7 +17,7 @@ export class PostPropertyComponent implements OnInit {
   previewUrls: string[] = [];
   categories = ['FAMILY', 'BACHELOR', 'SUBLET', 'ROOMMATE', 'SHOP', 'OFFICE', 'HOUSE']; // Example values
 
-  constructor(private fb: FormBuilder, private postService: PostPropertyService) {}
+  constructor(private fb: FormBuilder, private postService: PostPropertyService, private router: Router) {}
 
   ngOnInit(): void {
     this.propertyForm = this.fb.group({
@@ -82,8 +83,10 @@ export class PostPropertyComponent implements OnInit {
 
     this.postService.postProperty(propertyPostData).subscribe({
       next: (res) => {
-        alert(res);
+        alert("Property post sucessfully.");
         this.propertyForm.reset();
+        this.router.navigateByUrl('/home');
+        
       },
       error: (err) => {
         alert(err.error.message || 'Failed to post property');

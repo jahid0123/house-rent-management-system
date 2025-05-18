@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 public class UserEditDto {
 
     private Long userId;
+
     private String name;
     private String phone;
 

@@ -63,7 +63,7 @@ unlockProperty(): void {
     this.homeService.unlockProperty(userId, propertyPostId).subscribe({
       next: (res) => {
         alert('Property unlocked successfully!');
-        // Optional: Close modal or mark as unlocked
+        this.router.navigateByUrl("/unlock-property");
       },
       error: (err) => {
         console.error('Unlock failed:', err);

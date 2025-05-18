@@ -7,6 +7,10 @@ import { UnlockPropertyComponent } from './page/unlock-property/unlock-property.
 import { PurchaseHistoryComponent } from './page/purchase-history/purchase-history.component';
 import { BuyPackageComponent } from './page/buy-package/buy-package.component';
 import { PostPropertyComponent } from './page/post-property/post-property.component';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { ManagePostComponent } from './admin/manage-post/manage-post.component';
+import { ManageUserComponent } from './admin/manage-user/manage-user.component';
+import { ManagePackagesComponent } from './admin/manage-packages/manage-packages.component';
 
 export const routes: Routes = [
 
@@ -18,6 +22,10 @@ export const routes: Routes = [
     {path: 'purchase-history', component: PurchaseHistoryComponent},
     {path: 'buy-package', component: BuyPackageComponent},
     {path: 'post-property', component: PostPropertyComponent},
+    {path: 'dashboard', component: DashboardComponent},
+    {path: 'manage-packages', component: ManagePackagesComponent},
+    {path: 'manage-post', component: ManagePostComponent},
+    {path: 'manage-user', component: ManageUserComponent},
     {path: '**', redirectTo: 'home'}
 
 ];
