@@ -2,6 +2,7 @@ package com.jmjbrothers.spring.securtiy.authentication.service;
 
 
 import com.jmjbrothers.spring.securtiy.authentication.dto.BuyPackageDto;
+import com.jmjbrothers.spring.securtiy.authentication.dto.PurchaseHistoryDto;
 import com.jmjbrothers.spring.securtiy.authentication.model.CreditPackage;
 import com.jmjbrothers.spring.securtiy.authentication.model.BuyPackage;
 import com.jmjbrothers.spring.securtiy.authentication.model.User;
@@ -9,6 +10,9 @@ import com.jmjbrothers.spring.securtiy.authentication.repository.CreditPackageRe
 import com.jmjbrothers.spring.securtiy.authentication.repository.BuyPackageRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class BuyPackageService {
@@ -56,4 +60,25 @@ public class BuyPackageService {
         return creditTransactionRepository.save(creditTransaction);
 
     }
+
+    @Transactional
+    public List<PurchaseHistoryDto> allPropertyUnlockById(Long id) {
+        List<BuyPackage> myPurchaseHistory = creditTransactionRepository.findAllByUserId(id);
+
+        List<PurchaseHistoryDto> historyDtos = myPurchaseHistory.stream().map(this::responseHistoryDto).collect(Collectors.toList());
+        return historyDtos;
+    }
+
+    private PurchaseHistoryDto responseHistoryDto(BuyPackage buyPackage) {
+
+        PurchaseHistoryDto dto = new PurchaseHistoryDto();
+        dto.setPackageName(buyPackage.getCreditPackage().getName());
+        dto.setCreditsPurchased(buyPackage.getCreditsPurchased());
+        dto.setAmountPaid(buyPackage.getAmountPaid());
+        dto.setDatePurchased(buyPackage.getDatePurchased());
+
+        return dto;
+    }
+
+
 }

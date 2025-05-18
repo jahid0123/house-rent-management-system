@@ -1,1 +1,31 @@
-<p>purchase-history works!</p>
+<h2 class="container mt-5 text-center fw-bold text-success">
+  💳 My Purchased Credit Packages History
+</h2>
+
+<div class="container mt-4">
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <div class="col" *ngFor="let package of creditPackages">
+      <div class="card shadow-sm rounded-4 border border-light">
+        <div class="card-body">
+          <h5 class="card-title text-primary fw-bold">
+            <i class="bi bi-box-fill me-2 text-info"></i> {{ package.packageName }} Package
+          </h5>
+          <ul class="list-unstyled mt-3">
+            <li>
+              <i class="bi bi-star-fill text-warning me-2"></i>
+              <strong>Credits:</strong> {{ package.creditsPurchased }}
+            </li>
+            <li>
+              <i class="bi bi-currency-dollar text-success me-2"></i>
+              <strong>Amount Paid:</strong> ৳{{ package.amountPaid }}
+            </li>
+            <li>
+              <i class="bi bi-calendar-check-fill text-secondary me-2"></i>
+              <strong>Purchased On:</strong> {{ package.datePurchased}}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

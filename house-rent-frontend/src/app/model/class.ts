@@ -113,5 +113,13 @@ export interface UnlockedPost {
 }
 
 
+export interface MyPurchasePackageHistory {
+  packageName: string;
+  creditsPurchased: number;
+  amountPaid: number;
+  datePurchased: Date;
+}
+
+
 
 
