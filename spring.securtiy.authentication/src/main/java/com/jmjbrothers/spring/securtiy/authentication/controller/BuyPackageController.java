@@ -35,6 +35,15 @@ public class BuyPackageController {
         return new ResponseEntity<>(allPurchaseHistory, HttpStatus.OK);
     }
 
+    @GetMapping("/buy/package/all")
+    public ResponseEntity<?> getAllCreditPurchaseHistory(){
+        List<PurchaseHistoryDto> allPurchaseHistory = transactionService.allPropertyUnlock();
+        if (allPurchaseHistory == null){
+            return ResponseEntity.badRequest().body("No unlock property yet");
+        }
+        return new ResponseEntity<>(allPurchaseHistory, HttpStatus.OK);
+    }
+
 
 
 }

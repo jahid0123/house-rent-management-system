@@ -10,6 +10,9 @@ export class PurchaseHistoryService {
   private myPurchaseHistoryUrl =
     'http://localhost:8080/api/user/buy/package/me';
 
+  private getPurchaseHistoryUrl =
+    'http://localhost:8080/api/user/buy/package/all';
+
   constructor(private http: HttpClient) {}
 
   getPurchaseHistory(): Observable<MyPurchasePackageHistory[]> {
@@ -18,5 +21,9 @@ export class PurchaseHistoryService {
     const params = new HttpParams().set('id', safeUserId);
 
     return this.http.get<MyPurchasePackageHistory[]>(this.myPurchaseHistoryUrl, {params});
+  }
+
+  getAllPurchaseHistory(): Observable<MyPurchasePackageHistory[]> {
+    return this.http.get<MyPurchasePackageHistory[]>(this.getPurchaseHistoryUrl);
   }
 }

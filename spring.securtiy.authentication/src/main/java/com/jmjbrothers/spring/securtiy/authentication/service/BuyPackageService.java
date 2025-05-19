@@ -81,4 +81,12 @@ public class BuyPackageService {
     }
 
 
+    @Transactional
+    public List<PurchaseHistoryDto> allPropertyUnlock() {
+        List<BuyPackage> myPurchaseHistory = creditTransactionRepository.findAll();
+
+        List<PurchaseHistoryDto> historyDtos = myPurchaseHistory.stream().map(this::responseHistoryDto).collect(Collectors.toList());
+        return historyDtos;
+
+    }
 }
