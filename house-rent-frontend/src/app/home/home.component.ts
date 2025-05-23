@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
   selectedProperty: GetPostedProperty | null = null;
 
   currentPage: number = 1;
-  itemsPerPage: number = 6;
+  itemsPerPage: number = 9;
   totalPages: number = 1;
 
   constructor(private router: Router, private homeService: HomeService) {}
@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit {
   loadAllProperties(): void {
     this.homeService.getPostedProperty().subscribe({
       next: (res: GetPostedProperty[]) => {
-        this.getAllPostedProperty = res;
+        this.getAllPostedProperty = res.filter(property => property.isAvailable);
         this.applyFiltersAndSorting(); // Initial apply
       },
       error: (err) => {
