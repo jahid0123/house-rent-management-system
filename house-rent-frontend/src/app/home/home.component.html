@@ -1,128 +1,106 @@
-<div class="container mt-4">
-  <div>
-    <h1 class="text-center mb-4">Explore Available Rental Properties That Match Your Lifestyle</h1>
-  </div>
-
-  <!-- Filter, Sort, and Search Controls -->
-  <div class="d-flex justify-content-between mb-4 flex-wrap gap-2 align-items-end">
-    <!-- Sort Dropdown -->
-    <div>
-      <label for="sort" class="font-weight-bold">Sort By:</label>
-      <select id="sort" class="form-control" style="width: 200px" (change)="onSortChange($event)">
-        <option value="priceLowToHigh">Price: Low to High</option>
-        <option value="priceHighToLow">Price: High to Low</option>
-      </select>
+<!-- <div class="container mt-4">
+  <div class="row mb-3">
+    <div class="col-md-3">
+      <input
+        id="searchKeyword"
+        type="text"
+        class="form-control"
+        style="width: 250px"
+        placeholder="Search by title or location..."
+        [(ngModel)]="searchKeyword"
+        (keydown.enter)="onSearch()"
+      />
     </div>
-
-    <!-- Filter Dropdown -->
-    <div>
-      <label for="categoryFilter" class="font-weight-bold">Filter By Category:</label>
-      <select id="categoryFilter" class="form-control" style="width: 200px" (change)="onCategoryChange($event)">
-        <option value="">All Categories</option>
-        <option value="family">Family</option>
-        <option value="bachelor">Bachelor</option>
-        <option value="sublet">Sublet</option>
-        <option value="roommate">Roommate</option>
+    <div class="col-md-3">
+      <select
+        [(ngModel)]="selectedSortOption"
+        (change)="onSortChange()"
+        class="form-select"
+        style="width: 180px"
+      >
+        <option value="default">Sort by</option>
+        <option value="lowToHigh">Price (Low to High)</option>
+        <option value="highToLow">Price (High to Low)</option>
+        <option value="newest">Newest</option>
       </select>
-    </div>
-
-    <!-- Search Field -->
-    <div>
-      <label for="searchKeyword" class="font-weight-bold">Search:</label>
-      <input id="searchKeyword" type="text" class="form-control" style="width: 250px" placeholder="Search by title or location..." [(ngModel)]="searchKeyword" (input)="onSearch()" />
     </div>
   </div>
 
-  <!-- Property Cards -->
-  <div class="row row-cols-1 row-cols-md-3 g-4">
-    <div class="col" *ngFor="let property of paginatedProperties">
-      <div class="card h-100 shadow-sm">
+  <div
+    *ngIf="paginatedProperties.length === 0"
+    class="alert alert-info text-center"
+  >
+    No properties found matching your criteria.
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 mb-4" *ngFor="let property of paginatedProperties">
+      <div class="card h-100">
+        <div *ngIf="property.imageUrls.length > 0" class="swiper mySwiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide" *ngFor="let img of property.imageUrls">
+              <img
+                [src]="img"
+                alt="Property Image"
+                class="card-img-top"
+                style="height: 200px; object-fit: cover; width: 100%"
+              />
+            </div>
+          </div>
+           Swiper pagination and navigation 
+          <div class="swiper-pagination"></div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+        </div>
+
         <div class="card-body">
           <h5 class="card-title">{{ property.title }}</h5>
-          <h6 class="card-subtitle mb-2 text-muted">{{ property.category }}</h6>
-          <p class="card-text">{{ property.description }}</p>
-
-          <ul class="list-group list-group-flush mb-3">
-            <li class="list-group-item"><strong>Rent:</strong> {{ property.rentAmount }} BDT</li>
-            <li class="list-group-item">
-              <strong>Location:</strong>
-              {{ property.section }}, {{ property.thana }}, {{ property.district }}, {{ property.division }}
-            </li>
-            <li class="list-group-item"><strong>Available From:</strong> {{ property.availableFrom }}</li>
-            <li class="list-group-item">
-              <strong>Status:</strong>
-              <span class="badge" [ngClass]="property.isAvailable ? 'bg-success' : 'bg-secondary'">
-                {{ property.isAvailable ? 'Available' : 'Not Available' }}
-              </span>
-            </li>
-          </ul>
-
-          <button class="btn btn-primary w-100" (click)="openModal(property)">View Details</button>
+          <p class="card-text">
+            <strong>District:</strong> {{ property.district }}<br />
+            <strong>Division:</strong> {{ property.division }}<br />
+            <strong>Rent:</strong> ₹{{ property.rentAmount }}<br />
+            <strong>Available From:</strong> {{ property.availableFrom | date }}<br />
+            <strong>Description:</strong> {{ property.description }}
+          </p>
         </div>
-        <div class="card-footer text-muted text-end">
-          Posted on {{ property.datePosted }}
+        <div class="card-footer">
+          <small class="text-muted">
+            Posted on: {{ property.datePosted | date: 'mediumDate' }}
+          </small>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Pagination -->
-  <div class="d-flex justify-content-center mt-4">
-    <nav>
-      <ul class="pagination">
-        <li class="page-item" [class.disabled]="currentPage === 1">
-          <button class="page-link" (click)="previousPage()">Previous</button>
-        </li>
-        <li class="page-item disabled">
-          <span class="page-link">Page {{ currentPage }} of {{ totalPages }}</span>
-        </li>
-        <li class="page-item" [class.disabled]="currentPage === totalPages">
-          <button class="page-link" (click)="nextPage()">Next</button>
-        </li>
-      </ul>
-    </nav>
+  <nav *ngIf="totalPages > 1">
+    <ul class="pagination justify-content-center">
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <button class="page-link" (click)="goToPreviousPage()">Previous</button>
+      </li>
+      <li
+        class="page-item"
+        *ngFor="let page of [].constructor(totalPages); let i = index"
+        [class.active]="currentPage === i + 1"
+      >
+        <button class="page-link" (click)="goToPage(i + 1)">{{ i + 1 }}</button>
+      </li>
+      <li class="page-item" [class.disabled]="currentPage === totalPages">
+        <button class="page-link" (click)="goToNextPage()">Next</button>
+      </li>
+    </ul>
+  </nav>
+</div> -->
+
+<div class="container mt-4">
+  <div>
+    <h1 class="text-center mb-4">
+      Explore Available Rental Properties That Match Your Lifestyle
+    </h1>
   </div>
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="propertyModal" tabindex="-1" aria-labelledby="propertyModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header bg-primary text-white">
-        <h5 class="modal-title" id="propertyModalLabel">{{ selectedProperty?.title }}</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p><strong>Category:</strong> {{ selectedProperty?.category }}</p>
-        <p><strong>Description:</strong> {{ selectedProperty?.description }}</p>
-        <p><strong>Rent Amount:</strong> {{ selectedProperty?.rentAmount }} BDT</p>
-        <p><strong>Location:</strong> {{ selectedProperty?.section }}, {{ selectedProperty?.thana }}, {{ selectedProperty?.district }}, {{ selectedProperty?.division }}</p>
-        <p><strong>Available From:</strong> {{ selectedProperty?.availableFrom }}</p>
-        <p><strong>Status:</strong>
-          <span class="badge" [ngClass]="selectedProperty?.isAvailable ? 'bg-success' : 'bg-secondary'">
-            {{ selectedProperty?.isAvailable ? 'Available' : 'Not Available' }}
-          </span>
-        </p>
-        <p><strong>Posted Date:</strong> {{ selectedProperty?.datePosted }}</p>
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-outline-primary" (click)="unlockProperty()">Unlock</button>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-<!-- <div class="container mt-4">
+  <!-- Filter and Sort Controls -->
+  <div class="d-flex justify-content-between mb-4">
+    Sort Dropdown
     <div>
-        <h1 class="text-center mb-4">Explore Available Rental Properties That Match Your Lifestyle</h1>
-    </div> -->
-     <!-- Filter and Sort Controls -->
-  <!-- <div class="d-flex justify-content-between mb-4"> -->
-    <!-- Sort Dropdown -->
-    <!-- <div>
       <label for="sort" class="font-weight-bold">Sort By:</label>
       <select
         id="sort"
@@ -134,10 +112,10 @@
         <option value="sizeLowToHigh">Size: Low to High</option>
         <option value="sizeHighToLow">Size: High to Low</option>
       </select>
-    </div> -->
+    </div>
 
     <!-- Filter Dropdown -->
-    <!-- <div>
+    <div>
       <label for="categoryFilter" class="font-weight-bold"
         >Filter By Category:</label
       >
@@ -163,20 +141,31 @@
           <p class="card-text">{{ property.description }}</p>
 
           <ul class="list-group list-group-flush mb-3">
-            <li class="list-group-item"><strong>Rent:</strong> {{ property.rentAmount }} BDT</li>
             <li class="list-group-item">
-              <strong>Location:</strong> {{ property.section }}, {{ property.thana }}, {{ property.district }}, {{ property.division }}
+              <strong>Rent:</strong> {{ property.rentAmount }} BDT
             </li>
-            <li class="list-group-item"><strong>Available From:</strong> {{ property.availableFrom }}</li>
+            <li class="list-group-item">
+              <strong>Location:</strong> {{ property.section }},
+              {{ property.thana }}, {{ property.district }},
+              {{ property.division }}
+            </li>
+            <li class="list-group-item">
+              <strong>Available From:</strong> {{ property.availableFrom }}
+            </li>
             <li class="list-group-item">
               <strong>Status:</strong>
-              <span class="badge" [ngClass]="property.isAvailable ? 'bg-success' : 'bg-secondary'">
-                {{ property.isAvailable ? 'Available' : 'Not Available' }}
+              <span
+                class="badge"
+                [ngClass]="property.isAvailable ? 'bg-success' : 'bg-secondary'"
+              >
+                {{ property.isAvailable ? "Available" : "Not Available" }}
               </span>
             </li>
           </ul>
 
-          <button class="btn btn-primary w-100" (click)="openModal(property)">View Details</button>
+          <button class="btn btn-primary w-100" (click)="openModal(property)">
+            View Details
+          </button>
         </div>
         <div class="card-footer text-muted text-end">
           Posted on {{ property.datePosted }}
@@ -184,33 +173,68 @@
       </div>
     </div>
   </div>
-</div> -->
+</div>
 
 <!-- Modal -->
-<!-- <div class="modal fade" id="propertyModal" tabindex="-1" aria-labelledby="propertyModalLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  id="propertyModal"
+  tabindex="-1"
+  aria-labelledby="propertyModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-lg modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header bg-primary text-white">
-        <h5 class="modal-title" id="propertyModalLabel">{{ selectedProperty?.title }}</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h5 class="modal-title" id="propertyModalLabel">
+          {{ selectedProperty?.title }}
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
       <div class="modal-body">
         <p><strong>Category:</strong> {{ selectedProperty?.category }}</p>
         <p><strong>Description:</strong> {{ selectedProperty?.description }}</p>
-        <p><strong>Rent Amount:</strong> {{ selectedProperty?.rentAmount }} BDT</p>
-        <p><strong>Location:</strong> {{ selectedProperty?.section }}, {{ selectedProperty?.thana }}, {{ selectedProperty?.district }}, {{ selectedProperty?.division }}</p>
-        <p><strong>Available From:</strong> {{ selectedProperty?.availableFrom }}</p>
-        <p><strong>Status:</strong> 
-          <span class="badge" [ngClass]="selectedProperty?.isAvailable ? 'bg-success' : 'bg-secondary'">
-            {{ selectedProperty?.isAvailable ? 'Available' : 'Not Available' }}
+        <p>
+          <strong>Rent Amount:</strong> {{ selectedProperty?.rentAmount }} BDT
+        </p>
+        <p>
+          <strong>Location:</strong> {{ selectedProperty?.section }},
+          {{ selectedProperty?.thana }}, {{ selectedProperty?.district }},
+          {{ selectedProperty?.division }}
+        </p>
+        <p>
+          <strong>Available From:</strong> {{ selectedProperty?.availableFrom }}
+        </p>
+        <p>
+          <strong>Status:</strong>
+          <span
+            class="badge"
+            [ngClass]="
+              selectedProperty?.isAvailable ? 'bg-success' : 'bg-secondary'
+            "
+          >
+            {{ selectedProperty?.isAvailable ? "Available" : "Not Available" }}
           </span>
         </p>
         <p><strong>Posted Date:</strong> {{ selectedProperty?.datePosted }}</p>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-outline-primary" (click)="unlockProperty()">Unlock</button>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button
+          class="btn btn-outline-primary"
+          [disabled]="!selectedProperty?.isAvailable"
+          (click)="unlockProperty()"
+        >
+          Unlock
+        </button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
       </div>
     </div>
   </div>
-</div> -->
+</div>

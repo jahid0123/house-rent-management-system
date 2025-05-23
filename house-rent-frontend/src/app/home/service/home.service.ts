@@ -7,6 +7,38 @@ import { GetPostedProperty } from '../../model/class';
 @Injectable({
   providedIn: 'root'
 })
+
+// export class HomeService {
+
+
+//    private getPostedPropertyURL = 'http://localhost:8080/api/user/all/posted/property';
+//   private postUnlockPropertyURL = 'http://localhost:8080/api/user/property/unlock';
+
+//   constructor(private http: HttpClient) {}
+
+//   getPostedProperty(): Observable<GetPostedProperty[]> {
+//     return this.http.get<GetPostedProperty[]>(this.getPostedPropertyURL);
+//   }
+
+//   unlockProperty(userId: number, propertyPostId: number): Observable<any> {
+//     const payload = { userId, propertyPostId };
+//     return this.http.post(this.postUnlockPropertyURL, payload);
+//   }
+
+//   // private getPostedPropertyURL = 'http://localhost:8080/api/user/all/posted/property';
+//   // private postUnlockPropertyURL = 'http://localhost:8080/api/user/property/unlock';
+
+//   // constructor(private http: HttpClient) {}
+
+//   // getPostedProperty(): Observable<GetPostedProperty[]> {
+//   //   return this.http.get<GetPostedProperty[]>(this.getPostedPropertyURL);
+//   // }
+
+//   // unlockProperty(userId: number, propertyPostId: number): Observable<any> {
+//   //   const payload = { userId, propertyPostId };
+//   //   return this.http.post(this.postUnlockPropertyURL, payload);
+//   // }
+// }
 export class HomeService {
 
 
