@@ -1,23 +1,35 @@
 import { Component, OnInit } from '@angular/core';
 import { Property } from '../../model/class';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { NgFor } from '@angular/common';
+import { CommonModule, NgFor } from '@angular/common';
 import { PostPropertyService } from './service/post-property.service';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-post-property',
-  imports: [ReactiveFormsModule, NgFor],
+  imports: [ReactiveFormsModule, NgFor, CommonModule],
   templateUrl: './post-property.component.html',
-  styleUrl: './post-property.component.css'
+  styleUrl: './post-property.component.css',
 })
 export class PostPropertyComponent implements OnInit {
   propertyForm!: FormGroup;
   selectedFiles: File[] = [];
   previewUrls: string[] = [];
-  categories = ['FAMILY', 'BACHELOR', 'SUBLET', 'ROOMMATE', 'SHOP', 'OFFICE', 'HOUSE']; // Example values
+  categories = [
+    'FAMILY',
+    'BACHELOR',
+    'SUBLET',
+    'ROOMMATE',
+    'SHOP',
+    'OFFICE',
+    'HOUSE',
+  ];
 
-  constructor(private fb: FormBuilder, private postService: PostPropertyService, private router: Router) {}
+  constructor(
+    private fb: FormBuilder,
+    private postService: PostPropertyService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.propertyForm = this.fb.group({
@@ -39,61 +51,159 @@ export class PostPropertyComponent implements OnInit {
     });
   }
 
-
-
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files) {
-      this.previewUrls = []; // clear previous previews
-      Array.from(input.files).forEach(file => {
+      this.selectedFiles = Array.from(input.files);
+      this.previewUrls = [];
+
+      this.selectedFiles.forEach((file) => {
         const reader = new FileReader();
         reader.onload = (e: any) => {
-          this.previewUrls.push(e.target.result); // add base64 image string to previewUrls
+          this.previewUrls.push(e.target.result);
         };
         reader.readAsDataURL(file);
       });
     }
   }
 
+  onSubmit(): void {
+    const userID = Number(localStorage.getItem('id'));
+
+    if (this.propertyForm.valid) {
+      const {
+        title,
+        category,
+        description,
+        address,
+        contactPerson,
+        contactNumber,
+        area,
+        availableFrom,
+        rentAmount,
+        division,
+        district,
+        thana,
+        section,
+        roadNumber,
+        houseNumber,
+      } = this.propertyForm.value;
+
+      const propertyPostData = {
+        userID,
+        title,
+        category,
+        description,
+        address,
+        contactPerson,
+        contactNumber,
+        area,
+        availableFrom,
+        rentAmount,
+        division,
+        district,
+        thana,
+        section,
+        roadNumber,
+        houseNumber,
+      };
+
+      this.postService
+        .postPropertyWithImages(propertyPostData, this.selectedFiles)
+        .subscribe({
+          next: (res) => {
+            alert("Successfully Posted..");
+            this.propertyForm.reset();
+            this.previewUrls = [];
+            this.selectedFiles = [];
+            this.router.navigateByUrl('/home');
+          },
+          error: (err) => {
+            console.error('Post error:', err);
+            alert(err.error.message);
+          },
+        });
+    }
+  }
+  // propertyForm!: FormGroup;
+  // selectedFiles: File[] = [];
+  // previewUrls: string[] = [];
+  // categories = ['FAMILY', 'BACHELOR', 'SUBLET', 'ROOMMATE', 'SHOP', 'OFFICE', 'HOUSE']; // Example values
+
+  // constructor(private fb: FormBuilder, private postService: PostPropertyService, private router: Router) {}
+
+  // ngOnInit(): void {
+  //   this.propertyForm = this.fb.group({
+  //     title: [''],
+  //     category: [''],
+  //     description: [''],
+  //     address: [''],
+  //     contactPerson: [''],
+  //     contactNumber: [''],
+  //     area: [''],
+  //     availableFrom: [''],
+  //     rentAmount: [''],
+  //     division: [''],
+  //     district: [''],
+  //     thana: [''],
+  //     section: [''],
+  //     roadNumber: [''],
+  //     houseNumber: [''],
+  //   });
+  // }
+
   // onFileSelected(event: Event): void {
   //   const input = event.target as HTMLInputElement;
-  //   if (input.files && input.files.length > 0) {
-  //     this.selectedFiles = Array.from(input.files);
-  //     console.log('Selected files:', this.selectedFiles);
+  //   if (input.files) {
+  //     this.previewUrls = []; // clear previous previews
+  //     Array.from(input.files).forEach(file => {
+  //       const reader = new FileReader();
+  //       reader.onload = (e: any) => {
+  //         this.previewUrls.push(e.target.result); // add base64 image string to previewUrls
+  //       };
+  //       reader.readAsDataURL(file);
+  //     });
   //   }
   // }
 
-  onSubmit(): void {
+  // // onFileSelected(event: Event): void {
+  // //   const input = event.target as HTMLInputElement;
+  // //   if (input.files && input.files.length > 0) {
+  // //     this.selectedFiles = Array.from(input.files);
+  // //     console.log('Selected files:', this.selectedFiles);
+  // //   }
+  // // }
 
-    const userID = Number(localStorage.getItem('id'));
+  // onSubmit(): void {
 
-    const formData = new FormData();
+  //   const userID = Number(localStorage.getItem('id'));
 
-    if(this.propertyForm.valid){
-      const { 
-        title, category, description, address,
-        contactPerson, contactNumber, area , availableFrom ,
-        rentAmount, division, district, thana, section, roadNumber, houseNumber} = this.propertyForm.value;
+  //   const formData = new FormData();
 
-      const propertyPostData = {
-        userID, title, category, description, address,
-        contactPerson, contactNumber, area , availableFrom ,
-        rentAmount, division, district, thana, section, roadNumber, houseNumber,
-    };    
+  //   if(this.propertyForm.valid){
+  //     const {
+  //       title, category, description, address,
+  //       contactPerson, contactNumber, area , availableFrom ,
+  //       rentAmount, division, district, thana, section, roadNumber, houseNumber} = this.propertyForm.value;
 
-    this.postService.postProperty(propertyPostData).subscribe({
-      next: (res) => {
-        alert("Property post sucessfully.");
-        this.propertyForm.reset();
-        this.router.navigateByUrl('/home');
-        
-      },
-      error: (err) => {
-        alert(err.error.message || 'Failed to post property');
-      }
-    });
-  }
-  
-  }
+  //     const propertyPostData = {
+  //       userID, title, category, description, address,
+  //       contactPerson, contactNumber, area , availableFrom ,
+  //       rentAmount, division, district, thana, section, roadNumber, houseNumber,
+  //   };
 
+  //   this.postService.postProperty(propertyPostData).subscribe({
+  //     next: (res) => {
+  //       alert("Property post sucessfully.");
+  //       this.propertyForm.reset();
+  //       this.router.navigateByUrl('/home');
+
+  //     },
+  //     error: (err) => {
+  //       alert(err.error.message || 'Failed to post property');
+  //     }
+  //   });
+  // }
+
+  // }
 }

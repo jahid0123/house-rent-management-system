@@ -7,30 +7,50 @@ import { Observable } from 'rxjs';
 })
 export class PostPropertyService {
 
-  private postPropertyURL = 'http://localhost:8080/api/user/post/property';
-
+ private postPropertyURL = 'http://localhost:8080/api/user/post/property';
 
   constructor(private http: HttpClient) { }
 
-  postProperty(
-    data: {
-      userID: number; 
-      title: string; 
-      category: string;
-      description: string;
-      address: string;
-      contactPerson: string;
-      contactNumber: string;
-      area: string;
-      availableFrom: Date;
-      rentAmount: number;
-      division: string;
-      district: string;
-      thana: string;
-      section: string;
-      roadNumber: string;
-      houseNumber: string;
-    }): Observable<any>{
-    return this.http.post<any>(this.postPropertyURL, data);
+  postPropertyWithImages(propertyData: any, images: File[]): Observable<any> {
+    const formData = new FormData();
+
+    const propertyBlob = new Blob([JSON.stringify(propertyData)], {
+      type: 'application/json'
+    });
+
+    formData.append('property', propertyBlob);
+
+    images.forEach((file) => {
+      formData.append('images', file);
+    });
+
+    return this.http.post<any>(this.postPropertyURL, formData);
   }
+
+  // private postPropertyURL = 'http://localhost:8080/api/user/post/property';
+
+
+  // constructor(private http: HttpClient) { }
+
+  // postProperty(
+  //   data: {
+  //     userID: number; 
+  //     title: string; 
+  //     category: string;
+  //     description: string;
+  //     address: string;
+  //     contactPerson: string;
+  //     contactNumber: string;
+  //     area: string;
+  //     availableFrom: Date;
+  //     rentAmount: number;
+  //     division: string;
+  //     district: string;
+  //     thana: string;
+  //     section: string;
+  //     roadNumber: string;
+  //     houseNumber: string;
+  //   }): Observable<any>{
+  //   return this.http.post<any>(this.postPropertyURL, data);
+  // }
 }

@@ -11,12 +11,7 @@
           <label class="form-label fw-semibold">
             <i class="bi bi-pencil-square me-1"></i>Title
           </label>
-          <input
-            type="text"
-            formControlName="title"
-            class="form-control rounded-pill"
-            placeholder="Enter property title"
-          />
+          <input type="text" formControlName="title" class="form-control rounded-pill" placeholder="Enter property title" />
         </div>
 
         <!-- Category -->
@@ -24,10 +19,7 @@
           <label class="form-label fw-semibold">
             <i class="bi bi-list-ul me-1"></i>Category
           </label>
-          <select
-            formControlName="category"
-            class="form-select rounded-pill"
-          >
+          <select formControlName="category" class="form-select rounded-pill">
             <option value="" disabled>Select Category</option>
             <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
           </select>
@@ -38,12 +30,7 @@
           <label class="form-label fw-semibold">
             <i class="bi bi-chat-text-fill me-1"></i>Description
           </label>
-          <textarea
-            formControlName="description"
-            rows="4"
-            class="form-control rounded"
-            placeholder="Write detailed description here..."
-          ></textarea>
+          <textarea formControlName="description" rows="4" class="form-control rounded" placeholder="Write detailed description here..."></textarea>
         </div>
 
         <!-- Contact Person -->
@@ -51,12 +38,7 @@
           <label class="form-label fw-semibold">
             <i class="bi bi-person-badge-fill me-1"></i>Contact Person
           </label>
-          <input
-            type="text"
-            formControlName="contactPerson"
-            class="form-control rounded-pill"
-            placeholder="Name"
-          />
+          <input type="text" formControlName="contactPerson" class="form-control rounded-pill" placeholder="Name" />
         </div>
 
         <!-- Contact Number -->
@@ -64,12 +46,7 @@
           <label class="form-label fw-semibold">
             <i class="bi bi-telephone-fill me-1"></i>Contact Number
           </label>
-          <input
-            type="tel"
-            formControlName="contactNumber"
-            class="form-control rounded-pill"
-            placeholder="+880-XXXX-XXXXXX"
-          />
+          <input type="tel" formControlName="contactNumber" class="form-control rounded-pill" placeholder="+880-XXXX-XXXXXX" />
         </div>
 
         <!-- Available From -->
@@ -77,11 +54,7 @@
           <label class="form-label fw-semibold">
             <i class="bi bi-calendar-check-fill me-1"></i>Available From
           </label>
-          <input
-            type="date"
-            formControlName="availableFrom"
-            class="form-control rounded-pill"
-          />
+          <input type="date" formControlName="availableFrom" class="form-control rounded-pill" />
         </div>
 
         <!-- Rent Amount -->
@@ -89,27 +62,15 @@
           <label class="form-label fw-semibold">
             <i class="bi bi-cash-stack me-1"></i>Rent Amount (৳)
           </label>
-          <input
-            type="number"
-            formControlName="rentAmount"
-            class="form-control rounded-pill"
-            placeholder="Enter amount"
-          />
+          <input type="number" formControlName="rentAmount" class="form-control rounded-pill" placeholder="Enter amount" />
         </div>
-
-        
 
         <!-- Area -->
         <div class="col-md-6">
           <label class="form-label fw-semibold">
             <i class="bi bi-pin-map-fill me-1"></i>Area
           </label>
-          <input
-            type="text"
-            formControlName="area"
-            class="form-control rounded-pill"
-            placeholder="Area/Locality"
-          />
+          <input type="text" formControlName="area" class="form-control rounded-pill" placeholder="Area/Locality" />
         </div>
 
         <!-- Section -->
@@ -117,12 +78,7 @@
           <label class="form-label fw-semibold">
             <i class="bi bi-layout-text-sidebar-reverse me-1"></i>Section
           </label>
-          <input
-            type="text"
-            formControlName="section"
-            class="form-control rounded-pill"
-            placeholder="Section"
-          />
+          <input type="text" formControlName="section" class="form-control rounded-pill" placeholder="Section" />
         </div>
 
         <!-- Division -->
@@ -130,12 +86,7 @@
           <label class="form-label fw-semibold">
             <i class="bi bi-flag-fill me-1"></i>Division
           </label>
-          <input
-            type="text"
-            formControlName="division"
-            class="form-control rounded-pill"
-            placeholder="Division"
-          />
+          <input type="text" formControlName="division" class="form-control rounded-pill" placeholder="Division" />
         </div>
 
         <!-- District -->
@@ -143,64 +94,31 @@
           <label class="form-label fw-semibold">
             <i class="bi bi-building me-1"></i>District
           </label>
-          <input
-            type="text"
-            formControlName="district"
-            class="form-control rounded-pill"
-            placeholder="District"
-          />
+          <input type="text" formControlName="district" class="form-control rounded-pill" placeholder="District" />
         </div>
 
-          <!-- Thana -->
+        <!-- Thana -->
         <div class="col-md-4">
           <label class="form-label fw-semibold">
             <i class="bi bi-geo-fill me-1"></i>Thana
           </label>
-          <input
-            type="text"
-            formControlName="thana"
-            class="form-control rounded-pill"
-            placeholder="Thana"
-          />
+          <input type="text" formControlName="thana" class="form-control rounded-pill" placeholder="Thana" />
         </div>
 
-         <!-- Block -->
-        <!-- <div class="col-md-4">
-          <label class="form-label fw-semibold">
-            <i class="bi bi-signpost-2-fill me-1"></i>Block
-          </label>
-          <input
-            type="text"
-            formControlName="block"
-            class="form-control rounded-pill"
-            placeholder="Block"
-          />
-        </div> -->
-
         <!-- Road Number -->
-        <div class="col-md-4">
+        <div class="col-md-6">
           <label class="form-label fw-semibold">
             <i class="bi bi-signpost-2-fill me-1"></i>Road Number
           </label>
-          <input
-            type="text"
-            formControlName="roadNumber"
-            class="form-control rounded-pill"
-            placeholder="Road Number"
-          />
+          <input type="text" formControlName="roadNumber" class="form-control rounded-pill" placeholder="Road Number" />
         </div>
 
         <!-- House Number -->
-        <div class="col-md-4">
+        <div class="col-md-6">
           <label class="form-label fw-semibold">
             <i class="bi bi-house-fill me-1"></i>House Number
           </label>
-          <input
-            type="text"
-            formControlName="houseNumber"
-            class="form-control rounded-pill"
-            placeholder="House Number"
-          />
+          <input type="text" formControlName="houseNumber" class="form-control rounded-pill" placeholder="House Number" />
         </div>
 
         <!-- Address -->
@@ -208,12 +126,7 @@
           <label class="form-label fw-semibold">
             <i class="bi bi-geo-alt-fill me-1"></i>Short Address
           </label>
-          <input
-            type="text"
-            formControlName="address"
-            class="form-control rounded-pill"
-            placeholder="Full address"
-          />
+          <input type="text" formControlName="address" class="form-control rounded-pill" placeholder="Full address" />
         </div>
 
         <!-- Upload Images -->
@@ -232,8 +145,266 @@
             Supported formats: JPG, PNG. You can upload multiple files.
           </small>
 
-          <!-- Optional Image Preview -->
+          <!-- Image Preview -->
           <div class="mt-3 d-flex flex-wrap gap-2">
+            <img
+              *ngFor="let img of previewUrls"
+              [src]="img"
+              alt="Preview"
+              class="rounded shadow-sm"
+              style="width: 80px; height: 80px; object-fit: cover;"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="text-end mt-4">
+        <button type="submit" class="btn btn-primary btn-lg rounded-pill px-5 fw-bold">
+          <i class="bi bi-upload me-2"></i>Post Property
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
+
+
+<!-- <form [formGroup]="propertyForm" (ngSubmit)="onSubmit()" class="container mt-5">
+  <div class="card shadow rounded-4 border-0 bg-light">
+    <div class="card-body p-4">
+      <h3 class="card-title mb-4 fw-bold text-primary">
+        <i class="bi bi-building-add-fill me-3"></i>Post Your Property
+      </h3>
+
+      <div class="row g-3"> -->
+        <!-- Title -->
+        <!-- <div class="col-md-6">
+          <label class="form-label fw-semibold">
+            <i class="bi bi-pencil-square me-1"></i>Title
+          </label>
+          <input
+            type="text"
+            formControlName="title"
+            class="form-control rounded-pill"
+            placeholder="Enter property title"
+          />
+        </div> -->
+
+        <!-- Category -->
+        <!-- <div class="col-md-6">
+          <label class="form-label fw-semibold">
+            <i class="bi bi-list-ul me-1"></i>Category
+          </label>
+          <select
+            formControlName="category"
+            class="form-select rounded-pill"
+          >
+            <option value="" disabled>Select Category</option>
+            <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+          </select>
+        </div> -->
+
+        <!-- Description -->
+        <!-- <div class="col-12">
+          <label class="form-label fw-semibold">
+            <i class="bi bi-chat-text-fill me-1"></i>Description
+          </label>
+          <textarea
+            formControlName="description"
+            rows="4"
+            class="form-control rounded"
+            placeholder="Write detailed description here..."
+          ></textarea>
+        </div> -->
+
+        <!-- Contact Person -->
+        <!-- <div class="col-md-6">
+          <label class="form-label fw-semibold">
+            <i class="bi bi-person-badge-fill me-1"></i>Contact Person
+          </label>
+          <input
+            type="text"
+            formControlName="contactPerson"
+            class="form-control rounded-pill"
+            placeholder="Name"
+          />
+        </div> -->
+
+        <!-- Contact Number -->
+        <!-- <div class="col-md-6">
+          <label class="form-label fw-semibold">
+            <i class="bi bi-telephone-fill me-1"></i>Contact Number
+          </label>
+          <input
+            type="tel"
+            formControlName="contactNumber"
+            class="form-control rounded-pill"
+            placeholder="+880-XXXX-XXXXXX"
+          />
+        </div> -->
+
+        <!-- Available From -->
+        <!-- <div class="col-md-6">
+          <label class="form-label fw-semibold">
+            <i class="bi bi-calendar-check-fill me-1"></i>Available From
+          </label>
+          <input
+            type="date"
+            formControlName="availableFrom"
+            class="form-control rounded-pill"
+          />
+        </div> -->
+
+        <!-- Rent Amount -->
+        <!-- <div class="col-md-6">
+          <label class="form-label fw-semibold">
+            <i class="bi bi-cash-stack me-1"></i>Rent Amount (৳)
+          </label>
+          <input
+            type="number"
+            formControlName="rentAmount"
+            class="form-control rounded-pill"
+            placeholder="Enter amount"
+          />
+        </div> -->
+
+        
+
+        <!-- Area -->
+        <!-- <div class="col-md-6">
+          <label class="form-label fw-semibold">
+            <i class="bi bi-pin-map-fill me-1"></i>Area
+          </label>
+          <input
+            type="text"
+            formControlName="area"
+            class="form-control rounded-pill"
+            placeholder="Area/Locality"
+          />
+        </div> -->
+
+        <!-- Section -->
+        <!-- <div class="col-md-6">
+          <label class="form-label fw-semibold">
+            <i class="bi bi-layout-text-sidebar-reverse me-1"></i>Section
+          </label>
+          <input
+            type="text"
+            formControlName="section"
+            class="form-control rounded-pill"
+            placeholder="Section"
+          />
+        </div> -->
+
+        <!-- Division -->
+        <!-- <div class="col-md-4">
+          <label class="form-label fw-semibold">
+            <i class="bi bi-flag-fill me-1"></i>Division
+          </label>
+          <input
+            type="text"
+            formControlName="division"
+            class="form-control rounded-pill"
+            placeholder="Division"
+          />
+        </div> -->
+
+        <!-- District -->
+        <!-- <div class="col-md-4">
+          <label class="form-label fw-semibold">
+            <i class="bi bi-building me-1"></i>District
+          </label>
+          <input
+            type="text"
+            formControlName="district"
+            class="form-control rounded-pill"
+            placeholder="District"
+          />
+        </div> -->
+
+          <!-- Thana -->
+        <!-- <div class="col-md-4">
+          <label class="form-label fw-semibold">
+            <i class="bi bi-geo-fill me-1"></i>Thana
+          </label>
+          <input
+            type="text"
+            formControlName="thana"
+            class="form-control rounded-pill"
+            placeholder="Thana"
+          />
+        </div> -->
+
+         <!-- Block -->
+        <!-- <div class="col-md-4">
+          <label class="form-label fw-semibold">
+            <i class="bi bi-signpost-2-fill me-1"></i>Block
+          </label>
+          <input
+            type="text"
+            formControlName="block"
+            class="form-control rounded-pill"
+            placeholder="Block"
+          />
+        </div> -->
+
+        <!-- Road Number -->
+        <!-- <div class="col-md-4">
+          <label class="form-label fw-semibold">
+            <i class="bi bi-signpost-2-fill me-1"></i>Road Number
+          </label>
+          <input
+            type="text"
+            formControlName="roadNumber"
+            class="form-control rounded-pill"
+            placeholder="Road Number"
+          />
+        </div> -->
+
+        <!-- House Number -->
+        <!-- <div class="col-md-4">
+          <label class="form-label fw-semibold">
+            <i class="bi bi-house-fill me-1"></i>House Number
+          </label>
+          <input
+            type="text"
+            formControlName="houseNumber"
+            class="form-control rounded-pill"
+            placeholder="House Number"
+          />
+        </div> -->
+
+        <!-- Address -->
+        <!-- <div class="col-12">
+          <label class="form-label fw-semibold">
+            <i class="bi bi-geo-alt-fill me-1"></i>Short Address
+          </label>
+          <input
+            type="text"
+            formControlName="address"
+            class="form-control rounded-pill"
+            placeholder="Full address"
+          />
+        </div> -->
+
+        <!-- Upload Images -->
+        <!-- <div class="col-12">
+          <label class="form-label fw-semibold">
+            <i class="bi bi-images me-1"></i>Upload Property Pictures
+          </label>
+          <input
+            type="file"
+            class="form-control rounded-pill"
+            (change)="onFileSelected($event)"
+            multiple
+            accept="image/png, image/jpeg"
+          />
+          <small class="form-text text-muted">
+            Supported formats: JPG, PNG. You can upload multiple files.
+          </small> -->
+
+          <!-- Optional Image Preview -->
+          <!-- <div class="mt-3 d-flex flex-wrap gap-2">
             <img
               *ngFor="let img of previewUrls"
               [src]="img"
@@ -255,4 +426,4 @@
       </div>
     </div>
   </div>
-</form>
+</form> -->

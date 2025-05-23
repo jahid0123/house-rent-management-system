@@ -11,16 +11,20 @@ export interface GetPostedProperty {
   division: string;
   thana: string;
   section: string;
+  imageFilenames: string[];
+
+  // Add this line:
+  imageUrls: string[];
 }
 
-export interface GetAllCreditPackage{
+export interface GetAllCreditPackage {
   id: number;
   name: string;
   creditAmount: number;
   price: number;
 }
 
-export interface GetUserInfo{
+export interface GetUserInfo {
   name: string;
   email: string;
   phone: string;
@@ -46,7 +50,6 @@ export interface Property {
   houseNumber: string;
 }
 
-
 export interface MyPostedProperty {
   id: number;
   contactNumber: string;
@@ -67,7 +70,6 @@ export interface MyPostedProperty {
   houseNumber: string;
   address: string;
 }
-
 
 export interface UpdateMyPostedProperty {
   postId: number;
@@ -112,7 +114,6 @@ export interface UnlockedPost {
   address: string;
 }
 
-
 export interface MyPurchasePackageHistory {
   packageName: string;
   creditsPurchased: number;
@@ -127,8 +128,6 @@ export interface AddCreditPackage {
   price: number; // Use number for BigDecimal in Angular
 }
 
-
-
 export interface User {
   id: number;
   name: string;
@@ -139,7 +138,6 @@ export interface User {
   createdAt: string; // use string for LocalDateTime when coming from backend
 }
 
-
 export interface RentPost {
   postId: number;
   userId: number;
@@ -147,12 +145,12 @@ export interface RentPost {
   contactPerson: string;
   area: string;
   availableFrom: string; // ISO Date (e.g., "2025-06-01")
-  category: string;      // e.g., "SUBLET"
+  category: string; // e.g., "SUBLET"
   title: string;
   description: string;
   isAvailable: boolean;
   rentAmount: number;
-  datePosted: string;    // ISO Date (e.g., "2025-05-15")
+  datePosted: string; // ISO Date (e.g., "2025-05-15")
   division: string;
   district: string;
   thana: string;
@@ -161,5 +159,3 @@ export interface RentPost {
   houseNumber: string;
   address: string;
 }
-
-
