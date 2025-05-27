@@ -36,38 +36,59 @@
     </div>
   </div>
 
-  <!-- Property Cards -->
-  <div class="row row-cols-1 row-cols-md-3 g-4">
-    <div class="col" *ngFor="let property of paginatedProperties">
-      <div class="card h-100 shadow-sm">
-        <div class="card-body">
-          <h5 class="card-title">{{ property.title }}</h5>
-          <h6 class="card-subtitle mb-2 text-muted">{{ property.category }}</h6>
-          <p class="card-text">{{ property.description }}</p>
+<!-- Property Cards -->
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  <div class="col" *ngFor="let property of paginatedProperties">
+    <div class="card h-100 shadow-sm">
 
-          <ul class="list-group list-group-flush mb-3">
-            <li class="list-group-item"><strong>Rent:</strong> {{ property.rentAmount }} BDT</li>
-            <li class="list-group-item">
-              <strong>Location:</strong>
-              {{ property.section }}, {{ property.thana }}, {{ property.district }}, {{ property.division }}
-            </li>
-            <li class="list-group-item"><strong>Available From:</strong> {{ property.availableFrom }}</li>
-            <li class="list-group-item">
-              <strong>Status:</strong>
-              <span class="badge" [ngClass]="property.isAvailable ? 'bg-success' : 'bg-secondary'">
-                {{ property.isAvailable ? 'Available' : 'Not Available' }}
-              </span>
-            </li>
-          </ul>
+      <!-- Property Image or Default Image -->
+      <img
+        [src]="
+          property.imageUrls && property.imageUrls.length > 0
+            ? 'http://localhost:4200/api/user/property/image/' + property.imageUrls[0]
+            : 'default-property.jpg'
+        "
+        class="card-img-top"
+        alt="Property Image"
+        style="height: 200px; object-fit: cover;"
+      />
 
-          <button class="btn btn-primary w-100" (click)="openModal(property)">View Details</button>
-        </div>
-        <div class="card-footer text-muted text-end">
-          Posted on {{ property.datePosted }}
-        </div>
+      <div class="card-body">
+        <h5 class="card-title">{{ property.title }}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{ property.category }}</h6>
+        <p class="card-text">{{ property.description }}</p>
+
+        <ul class="list-group list-group-flush mb-3">
+          <li class="list-group-item"><strong>Rent:</strong> {{ property.rentAmount }} BDT</li>
+          <li class="list-group-item">
+            <strong>Location:</strong>
+            {{ property.section }}, {{ property.thana }}, {{ property.district }}, {{ property.division }}
+          </li>
+          <li class="list-group-item">
+            <strong>Available From:</strong> {{ property.availableFrom | date: 'longDate' }}
+          </li>
+          <li class="list-group-item">
+            <strong>Status:</strong>
+            <span
+              class="badge"
+              [ngClass]="property.isAvailable ? 'bg-success' : 'bg-secondary'"
+            >
+              {{ property.isAvailable ? 'Available' : 'Not Available' }}
+            </span>
+          </li>
+        </ul>
+
+        <button class="btn btn-primary w-100" (click)="openModal(property)">View Details</button>
+      </div>
+
+      <div class="card-footer text-muted text-end">
+        Posted on {{ property.datePosted | date: 'mediumDate' }}
       </div>
     </div>
   </div>
+</div>
+
+
 
   <!-- Pagination -->
   <div class="d-flex justify-content-center mt-4">

@@ -1,10 +1,10 @@
-import { Component, numberAttribute, OnInit } from '@angular/core';
+import { Component, NgModule, numberAttribute, OnInit } from '@angular/core';
 import { GetPostedProperty } from '../model/class';
 import { Router } from '@angular/router';
 import { HomeService } from './service/home.service';
-import { CommonModule, NgClass, NgFor } from '@angular/common';
+import { CommonModule, NgClass, NgFor, NgStyle } from '@angular/common';
 import { Modal } from 'bootstrap';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-home',

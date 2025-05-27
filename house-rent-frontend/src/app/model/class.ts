@@ -11,9 +11,6 @@ export interface GetPostedProperty {
   division: string;
   thana: string;
   section: string;
-  imageFilenames: string[];
-
-  // Add this line:
   imageUrls: string[];
 }
 
