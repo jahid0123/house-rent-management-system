@@ -50,41 +50,131 @@
   </div>
 </div>
 
-<!-- Modal -->
-<div class="modal" tabindex="-1" [ngClass]="{'show d-block': showModal}" *ngIf="showModal">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content p-3">
-      <div class="modal-header">
-        <h5 class="modal-title">Edit Property</h5>
-        <button type="button" class="btn-close" (click)="closeModal()"></button>
+<!-- Edit Property Modal -->
+<div class="modal fade show d-block" tabindex="-1" *ngIf="showModal" style="background: rgba(0, 0, 0, 0.6);">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+  <div class="modal-content p-3" style="max-height: 90vh; overflow-y: auto;">
+      
+      <!-- Modal Header -->
+      <div class="modal-header bg-primary text-white rounded-top-3">
+        <h5 class="modal-title">✏️ Edit Property</h5>
+        <button type="button" class="btn-close btn-close-white" (click)="closeModal()"></button>
       </div>
+
+      <!-- Form Start -->
       <form [formGroup]="editForm" (ngSubmit)="submitEdit()">
-        <div class="modal-body row g-3">
-          <div class="col-md-6">
-            <label>Title</label>
-            <input class="form-control" formControlName="title" />
+        <!-- Modal Body -->
+        <div class="modal-body px-4 py-3">
+          <div class="row g-3">
+
+            <!-- Title -->
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Title</label>
+              <input type="text" class="form-control" formControlName="title">
+            </div>
+
+            <!-- Contact Person -->
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Contact Person</label>
+              <input type="text" class="form-control" formControlName="contactPerson">
+            </div>
+
+            <!-- Contact Number -->
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Contact Number</label>
+              <input type="text" class="form-control" formControlName="contactNumber">
+            </div>
+
+            <!-- Available From -->
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Available From</label>
+              <input type="date" class="form-control" formControlName="availableFrom">
+            </div>
+
+            <!-- Rent Amount -->
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Rent Amount</label>
+              <input type="number" class="form-control" formControlName="rentAmount">
+            </div>
+
+            <!-- Category -->
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Category</label>
+              <select class="form-select" formControlName="category">
+                <option value="">-- Select Category --</option>
+                <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+              </select>
+            </div>
+
+            <!-- Divider for Address Section -->
+            <div class="col-12 pt-2">
+              <h6 class="fw-bold border-bottom pb-1 mt-2">📍 Address Information</h6>
+            </div>
+
+            <!-- Division -->
+            <div class="col-md-4">
+              <label class="form-label fw-semibold">Division</label>
+              <select class="form-select" formControlName="division">
+                <option value="">-- Select Division --</option>
+                <option *ngFor="let division of divisions" [value]="division">{{ division }}</option>
+              </select>
+            </div>
+
+            <!-- District -->
+            <div class="col-md-4">
+              <label class="form-label fw-semibold">District</label>
+              <select class="form-select" formControlName="district">
+                <option value="">-- Select District --</option>
+                <option *ngFor="let district of districts" [value]="district">{{ district }}</option>
+              </select>
+            </div>
+
+            <!-- Thana -->
+            <div class="col-md-4">
+              <label class="form-label fw-semibold">Thana</label>
+              <select class="form-select" formControlName="thana">
+                <option value="">-- Select Thana --</option>
+                <option *ngFor="let thana of thanas" [value]="thana">{{ thana }}</option>
+              </select>
+            </div>
+
+            <!-- Section -->
+            <div class="col-md-4">
+              <label class="form-label fw-semibold">Section</label>
+              <input type="text" class="form-control" formControlName="section">
+            </div>
+
+            <!-- Road Number -->
+            <div class="col-md-4">
+              <label class="form-label fw-semibold">Road Number</label>
+              <input type="text" class="form-control" formControlName="roadNumber">
+            </div>
+
+            <!-- House Number -->
+            <div class="col-md-4">
+              <label class="form-label fw-semibold">House Number</label>
+              <input type="text" class="form-control" formControlName="houseNumber">
+            </div>
+
+            <!-- Address -->
+            <div class="col-12">
+              <label class="form-label fw-semibold">Full Address</label>
+              <textarea class="form-control" rows="2" formControlName="address"></textarea>
+            </div>
+
+            <!-- Description -->
+            <div class="col-12">
+              <label class="form-label fw-semibold">Description</label>
+              <textarea class="form-control" rows="3" formControlName="description"></textarea>
+            </div>
+
           </div>
-          <div class="col-md-6">
-            <label>Contact Person</label>
-            <input class="form-control" formControlName="contactPerson" />
-          </div>
-          <div class="col-md-6">
-            <label>Contact Number</label>
-            <input class="form-control" formControlName="contactNumber" />
-          </div>
-          <div class="col-md-6">
-            <label>Rent Amount</label>
-            <input class="form-control" type="number" formControlName="rentAmount" />
-          </div>
-          <div class="col-md-6">
-            <label>Available From</label>
-            <input class="form-control" type="date" formControlName="availableFrom" />
-          </div>
-          <!-- Add other fields similarly... -->
         </div>
-        <div class="modal-footer mt-3">
-          <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancel</button>
-          <button type="submit" class="btn btn-primary">Save Changes</button>
+
+        <!-- Modal Footer -->
+        <div class="modal-footer bg-light border-0 rounded-bottom-4">
+          <button type="button" class="btn btn-outline-secondary" (click)="closeModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary">💾 Save Changes</button>
         </div>
       </form>
     </div>

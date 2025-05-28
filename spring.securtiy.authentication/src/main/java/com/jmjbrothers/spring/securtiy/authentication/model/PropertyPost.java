@@ -1,17 +1,20 @@
 package com.jmjbrothers.spring.securtiy.authentication.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-
 @Data
-@RequiredArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "jahid_property_post")
 public class PropertyPost {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -30,9 +33,6 @@ public class PropertyPost {
     @Column(name = "contact_person", nullable = false)
     private String contactPerson;
 
-//    @Column(name = "rent_area", nullable = false)
-//    private String area;
-
     @Column(name = "available_from", nullable = false)
     private LocalDate availableFrom;
 
@@ -48,6 +48,5 @@ public class PropertyPost {
             datePosted = LocalDate.now();
         }
     }
-
-    // Getters and Setters
 }
+

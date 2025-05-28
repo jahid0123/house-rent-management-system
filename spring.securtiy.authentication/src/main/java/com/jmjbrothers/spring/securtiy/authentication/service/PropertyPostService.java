@@ -77,11 +77,14 @@ public class PropertyPostService {
         }
 
         property.setImagePaths(imagePaths);
-        property = propertyRepository.save(property);
 
         // Deduct credit
         user.setBalanceCredits(user.getBalanceCredits() - 10);
         user = userRepository.save(user);
+
+        property = propertyRepository.save(property);
+
+        System.out.println("Property Save Successfully.");
 
         PropertyPost post = new PropertyPost();
         post.setUser(user);
@@ -90,7 +93,12 @@ public class PropertyPostService {
         post.setContactNumber(dto.getContactNumber());
         post.setAvailableFrom(dto.getAvailableFrom());
 
-        return propertyPostRepository.save(post);
+        PropertyPost savedPostProperty = propertyPostRepository.save(post);
+        System.out.println("Property Post Save Successfully.");
+
+
+
+        return savedPostProperty;
     }
 
 
@@ -186,10 +194,10 @@ public class PropertyPostService {
 
 
     @Transactional
-    public List<GetPostedProperty> allPropertyPostedByMe(Long id) {
+    public List<MyPostPropertyResponseDto> allPropertyPostedByMe(Long id) {
         List<PropertyPost> allPropertyUnlock = propertyPostRepository.findAllByUserId(id);
 
-        List<GetPostedProperty> myAllProperty = allPropertyUnlock.stream().map(this::getPostedPropertyMapped).collect(Collectors.toList());
+        List<MyPostPropertyResponseDto> myAllProperty = allPropertyUnlock.stream().map(this::myPostPropertyResponseDto).collect(Collectors.toList());
         return myAllProperty;
     }
 
@@ -201,7 +209,6 @@ public class PropertyPostService {
         myPost.setId(propertyPost.getId());
         myPost.setContactNumber(propertyPost.getContactNumber());
         myPost.setContactPerson(propertyPost.getContactPerson());
-//        myPost.setArea(propertyPost.getArea());
         myPost.setAvailableFrom(propertyPost.getAvailableFrom());
         myPost.setCategory(propertyPost.getProperty().getCategory());
         myPost.setTitle(propertyPost.getProperty().getTitle());
@@ -230,6 +237,7 @@ public class PropertyPostService {
 
         // Then delete the property if needed (and if not used elsewhere)
         propertyRepository.deleteById(post.getProperty().getId());
+
 
         return "Post deleted successfully!";
     }

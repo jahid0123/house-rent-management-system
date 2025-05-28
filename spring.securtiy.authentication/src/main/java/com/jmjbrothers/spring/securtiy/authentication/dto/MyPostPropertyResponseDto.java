@@ -13,7 +13,6 @@ public class MyPostPropertyResponseDto {
     private Long id;
     private String contactNumber;
     private String contactPerson;
-    private String area;
     private LocalDate availableFrom;
     private Category category;
     private String title;

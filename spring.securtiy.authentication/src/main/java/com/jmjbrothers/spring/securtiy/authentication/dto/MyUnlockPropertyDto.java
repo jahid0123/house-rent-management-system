@@ -17,7 +17,6 @@ public class MyUnlockPropertyDto {
     private LocalDateTime dateUnlocked;
     private String contactNumber;
     private String contactPerson;
-    private String area;
     private LocalDate availableFrom;
     private Category category;
     private String title;

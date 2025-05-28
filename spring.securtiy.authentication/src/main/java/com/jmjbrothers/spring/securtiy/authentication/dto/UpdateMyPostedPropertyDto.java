@@ -15,7 +15,6 @@ public class UpdateMyPostedPropertyDto {
     private Long postId;
     private String contactNumber;
     private String contactPerson;
-    private String area;
     private LocalDate availableFrom;
     @Enumerated(value = EnumType.STRING)
     private Category category;

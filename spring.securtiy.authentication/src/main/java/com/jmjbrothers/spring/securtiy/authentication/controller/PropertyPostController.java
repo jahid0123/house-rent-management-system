@@ -1,9 +1,6 @@
 package com.jmjbrothers.spring.securtiy.authentication.controller;
 
-import com.jmjbrothers.spring.securtiy.authentication.dto.GetPostedProperty;
-import com.jmjbrothers.spring.securtiy.authentication.dto.MyPostPropertyResponseDto;
-import com.jmjbrothers.spring.securtiy.authentication.dto.PropertyPostDto;
-import com.jmjbrothers.spring.securtiy.authentication.dto.UpdateMyPostedPropertyDto;
+import com.jmjbrothers.spring.securtiy.authentication.dto.*;
 import com.jmjbrothers.spring.securtiy.authentication.model.PropertyPost;
 import com.jmjbrothers.spring.securtiy.authentication.model.PropertyUnlock;
 import com.jmjbrothers.spring.securtiy.authentication.service.PropertyPostService;
@@ -66,8 +63,8 @@ public class PropertyPostController {
     }
 
     @GetMapping("/property/posted/me")
-    public ResponseEntity<List<GetPostedProperty>> getMyPostedProperties(@RequestParam Long id) {
-        List<GetPostedProperty> postedPropertyByMe = propertyPostService.allPropertyPostedByMe(id);
+    public ResponseEntity<List<MyPostPropertyResponseDto>> getMyPostedProperties(@RequestParam Long id) {
+        List<MyPostPropertyResponseDto> postedPropertyByMe = propertyPostService.allPropertyPostedByMe(id);
 
         return new ResponseEntity<>(postedPropertyByMe, HttpStatus.OK);
 
@@ -77,7 +74,7 @@ public class PropertyPostController {
     public ResponseEntity<?> deleteMyPostedProperties(@RequestParam Long id) {
         String deleteMyPostedProperties = propertyPostService.deleteMyPostedProperties(id);
 
-        return new ResponseEntity<>(deleteMyPostedProperties, HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
 
     }
 

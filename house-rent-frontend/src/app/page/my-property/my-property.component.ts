@@ -9,25 +9,35 @@ import { Router } from '@angular/router';
   selector: 'app-my-property',
   imports: [NgFor, NgClass, ReactiveFormsModule, CommonModule],
   templateUrl: './my-property.component.html',
-  styleUrl: './my-property.component.css'
+  styleUrl: './my-property.component.css',
 })
 export class MyPropertyComponent implements OnInit {
-
   flatList: MyPostedProperty[] = [];
   editForm: FormGroup;
   showModal: boolean = false;
   selectedFlatId: number | null = null;
 
+  categories = [
+    'FAMILY',
+    'BACHELOR',
+    'SUBLET',
+    'ROOMMATE',
+    'SHOP', 
+    'OFFICE',
+    'HOUSE',
+  ];
+  divisions = ['Dhaka', 'Chattogram', 'Khulna', 'Barisal'];
+  districts = ['Dhaka', 'Gazipur', 'Narayanganj'];
+  thanas = ['Dhanmondi', 'Mirpur', 'Uttara'];
   constructor(
     private myPropertyService: MyPropertyService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
   ) {
     this.editForm = this.fb.group({
       postId: [''],
       contactNumber: [''],
       contactPerson: [''],
-      area: [''],
       availableFrom: [''],
       category: [''],
       title: [''],
@@ -39,7 +49,7 @@ export class MyPropertyComponent implements OnInit {
       section: [''],
       roadNumber: [''],
       houseNumber: [''],
-      address: ['']
+      address: [''],
     });
   }
 
@@ -54,7 +64,7 @@ export class MyPropertyComponent implements OnInit {
       },
       error: () => {
         console.error('Failed to load user info');
-      }
+      },
     });
   }
 
@@ -63,7 +73,7 @@ export class MyPropertyComponent implements OnInit {
     this.editForm.patchValue({
       ...flat,
       postId: flat.id,
-      availableFrom: flat.availableFrom?.toString().split('T')[0]
+      availableFrom: flat.availableFrom?.toString().split('T')[0],
     });
     this.showModal = true;
   }
@@ -85,7 +95,7 @@ export class MyPropertyComponent implements OnInit {
         },
         error: () => {
           alert('Data not update!!!');
-        }
+        },
       });
     }
   }
@@ -99,7 +109,7 @@ export class MyPropertyComponent implements OnInit {
         },
         error: () => {
           alert('Something wrong!');
-        }
+        },
       });
     }
   }
