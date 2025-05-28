@@ -1,14 +1,23 @@
 <div class="container mt-4">
   <div>
-    <h1 class="text-center mb-4">Explore Available Rental Properties That Match Your Lifestyle</h1>
+    <h1 class="text-center mb-4">
+      Explore Available Rental Properties That Match Your Lifestyle
+    </h1>
   </div>
 
   <!-- Filter, Sort, and Search Controls -->
-  <div class="d-flex justify-content-between mb-4 flex-wrap gap-2 align-items-end">
+  <div
+    class="d-flex justify-content-between mb-4 flex-wrap gap-2 align-items-end"
+  >
     <!-- Sort Dropdown -->
     <div>
       <label for="sort" class="font-weight-bold">Sort By:</label>
-      <select id="sort" class="form-control" style="width: 200px" (change)="onSortChange($event)">
+      <select
+        id="sort"
+        class="form-control"
+        style="width: 200px"
+        (change)="onSortChange($event)"
+      >
         <option value="priceLowToHigh">Price: Low to High</option>
         <option value="priceHighToLow">Price: High to Low</option>
       </select>
@@ -16,8 +25,15 @@
 
     <!-- Filter Dropdown -->
     <div>
-      <label for="categoryFilter" class="font-weight-bold">Filter By Category:</label>
-      <select id="categoryFilter" class="form-control" style="width: 200px" (change)="onCategoryChange($event)">
+      <label for="categoryFilter" class="font-weight-bold"
+        >Filter By Category:</label
+      >
+      <select
+        id="categoryFilter"
+        class="form-control"
+        style="width: 200px"
+        (change)="onCategoryChange($event)"
+      >
         <option value="">All Categories</option>
         <option value="family">Family</option>
         <option value="bachelor">Bachelor</option>
@@ -32,62 +48,83 @@
     <!-- Search Field -->
     <div>
       <label for="searchKeyword" class="font-weight-bold">Search:</label>
-      <input id="searchKeyword" type="text" class="form-control" style="width: 250px" placeholder="Search by title or location..." [(ngModel)]="searchKeyword" (input)="onSearch()" />
+      <input
+        id="searchKeyword"
+        type="text"
+        class="form-control"
+        style="width: 250px"
+        placeholder="Search by title or location..."
+        [(ngModel)]="searchKeyword"
+        (input)="onSearch()"
+      />
     </div>
   </div>
 
-<!-- Property Cards -->
+ <!-- Property Cards -->
 <div class="row row-cols-1 row-cols-md-3 g-4">
   <div class="col" *ngFor="let property of paginatedProperties">
-    <div class="card h-100 shadow-sm">
+    <div class="card h-100 shadow-lg border-0 rounded-4 overflow-hidden">
+      
+      <!-- Image with rounded top corners -->
+      <div class="position-relative overflow-hidden" style="height: 220px;">
+        <img
+          [src]="
+            property.imageUrls && property.imageUrls.length > 0
+              ? 'http://localhost:8080/api/user/property/image/' + property.imageUrls[0]
+              : 'default-property.jpg'
+          "
+          alt="Property Image"
+          class="w-100 h-100 object-fit-cover"
+          style="border-top-left-radius: 1rem; border-top-right-radius: 1rem;"
+        />
+        <!-- Status badge top-left -->
+        <span
+          class="position-absolute top-0 start-0 m-3 px-3 py-1 rounded-pill text-white fs-6"
+          [ngClass]="property.isAvailable ? 'bg-success' : 'bg-secondary'"
+          style="backdrop-filter: brightness(0.8);"
+        >
+          {{ property.isAvailable ? 'Available' : 'Not Available' }}
+        </span>
+      </div>
 
-      <!-- Property Image or Default Image -->
-      <img
-        [src]="
-          property.imageUrls && property.imageUrls.length > 0
-            ? 'http://localhost:4200/api/user/property/image/' + property.imageUrls[0]
-            : 'default-property.jpg'
-        "
-        class="card-img-top"
-        alt="Property Image"
-        style="height: 200px; object-fit: cover;"
-      />
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title fw-bold mb-1">{{ property.title }}</h5>
+        <h6 class="card-subtitle text-muted mb-3">{{ property.category }}</h6>
 
-      <div class="card-body">
-        <h5 class="card-title">{{ property.title }}</h5>
-        <h6 class="card-subtitle mb-2 text-muted">{{ property.category }}</h6>
-        <p class="card-text">{{ property.description }}</p>
+        <p class="card-text text-truncate" style="flex-grow: 1;">
+          {{ property.description }}
+        </p>
 
-        <ul class="list-group list-group-flush mb-3">
-          <li class="list-group-item"><strong>Rent:</strong> {{ property.rentAmount }} BDT</li>
-          <li class="list-group-item">
+        <ul class="list-unstyled mb-3 small text-secondary">
+          <li>
+            <i class="bi bi-currency-dollar me-2"></i>
+            <strong>Rent:</strong> {{ property.rentAmount }} BDT
+          </li>
+          <li>
+            <i class="bi bi-geo-alt-fill me-2"></i>
             <strong>Location:</strong>
             {{ property.section }}, {{ property.thana }}, {{ property.district }}, {{ property.division }}
           </li>
-          <li class="list-group-item">
-            <strong>Available From:</strong> {{ property.availableFrom | date: 'longDate' }}
-          </li>
-          <li class="list-group-item">
-            <strong>Status:</strong>
-            <span
-              class="badge"
-              [ngClass]="property.isAvailable ? 'bg-success' : 'bg-secondary'"
-            >
-              {{ property.isAvailable ? 'Available' : 'Not Available' }}
-            </span>
+          <li>
+            <i class="bi bi-calendar-event me-2"></i>
+            <strong>Available From:</strong> {{ property.availableFrom | date:'longDate' }}
           </li>
         </ul>
 
-        <button class="btn btn-primary w-100" (click)="openModal(property)">View Details</button>
+        <button
+          class="btn btn-primary mt-auto w-100 fw-semibold"
+          (click)="openModal(property)"
+        >
+          View Details
+        </button>
       </div>
 
-      <div class="card-footer text-muted text-end">
-        Posted on {{ property.datePosted | date: 'mediumDate' }}
+      <div class="card-footer text-muted text-end fst-italic small">
+        Posted on {{ property.datePosted | date:'mediumDate' }}
       </div>
     </div>
   </div>
 </div>
-
 
 
   <!-- Pagination -->
@@ -98,7 +135,9 @@
           <button class="page-link" (click)="previousPage()">Previous</button>
         </li>
         <li class="page-item disabled">
-          <span class="page-link">Page {{ currentPage }} of {{ totalPages }}</span>
+          <span class="page-link"
+            >Page {{ currentPage }} of {{ totalPages }}</span
+          >
         </li>
         <li class="page-item" [class.disabled]="currentPage === totalPages">
           <button class="page-link" (click)="nextPage()">Next</button>
@@ -109,7 +148,152 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="propertyModal" tabindex="-1" aria-labelledby="propertyModalLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  id="propertyModal"
+  tabindex="-1"
+  aria-labelledby="propertyModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content shadow-lg rounded-3 border-0">
+      
+      <div class="modal-header bg-primary text-white rounded-top">
+        <h5 class="modal-title fw-bold" id="propertyModalLabel">
+          {{ selectedProperty?.title }}
+        </h5>
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+
+      <div class="modal-body p-3">
+        <!-- 🖼️ Image Carousel -->
+        <div
+          id="propertyImageCarousel"
+          class="carousel slide mb-4 rounded-3 shadow-sm"
+          data-bs-ride="carousel"
+          *ngIf="(selectedProperty?.imageUrls?.length ?? 0) > 0"
+          style="overflow: hidden;"
+        >
+          <div class="carousel-inner rounded-3">
+            <div
+              class="carousel-item"
+              *ngFor="let image of selectedProperty?.imageUrls; let i = index"
+              [ngClass]="{ active: i === 0 }"
+            >
+              <img
+                [src]="'http://localhost:8080/api/user/property/image/' + image"
+                class="d-block w-100"
+                alt="Property Image"
+                style="height: 320px; object-fit: cover; border-radius: 0.5rem;"
+              />
+            </div>
+          </div>
+          <button
+            class="carousel-control-prev"
+            type="button"
+            data-bs-target="#propertyImageCarousel"
+            data-bs-slide="prev"
+            style="width: 3rem;"
+          >
+            <span class="carousel-control-prev-icon"></span>
+          </button>
+          <button
+            class="carousel-control-next"
+            type="button"
+            data-bs-target="#propertyImageCarousel"
+            data-bs-slide="next"
+            style="width: 3rem;"
+          >
+            <span class="carousel-control-next-icon"></span>
+          </button>
+        </div>
+
+        <!-- Fallback image when no images are available -->
+        <div
+          *ngIf="
+            !selectedProperty?.imageUrls ||
+            selectedProperty?.imageUrls?.length === 0
+          "
+          class="mb-4 text-center"
+        >
+          <img
+            src="default-property.jpg"
+            alt="Default Property Image"
+            class="img-fluid rounded-3 shadow-sm"
+            style="height: 320px; object-fit: cover;"
+          />
+        </div>
+
+        <!-- Property Info Grid -->
+        <div class="row g-3 fs-6 text-secondary">
+          <div class="col-md-6">
+            <strong>Category:</strong>
+            <p class="mb-0">{{ selectedProperty?.category }}</p>
+          </div>
+          <div class="col-md-6">
+            <strong>Rent Amount:</strong>
+            <p class="mb-0">{{ selectedProperty?.rentAmount }} BDT</p>
+          </div>
+          <div class="col-12">
+            <strong>Description:</strong>
+            <p class="mb-0">{{ selectedProperty?.description }}</p>
+          </div>
+          <div class="col-md-6">
+            <strong>Location:</strong>
+            <p class="mb-0">
+              {{ selectedProperty?.section }}, {{ selectedProperty?.thana }},
+              {{ selectedProperty?.district }}, {{ selectedProperty?.division }}
+            </p>
+          </div>
+          <div class="col-md-6">
+            <strong>Available From:</strong>
+            <p class="mb-0">{{ selectedProperty?.availableFrom | date : "longDate" }}</p>
+          </div>
+          <div class="col-md-6 d-flex align-items-center">
+            <strong>Status:</strong>
+            <span
+              class="badge ms-2 px-3 py-2 fs-6"
+              [ngClass]="
+                selectedProperty?.isAvailable ? 'bg-success' : 'bg-secondary'
+              "
+            >
+              {{ selectedProperty?.isAvailable ? "Available" : "Not Available" }}
+            </span>
+          </div>
+          <div class="col-md-6">
+            <strong>Posted Date:</strong>
+            <p class="mb-0">{{ selectedProperty?.datePosted | date : "medium" }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer border-0 px-4 pb-4">
+        <button
+          class="btn btn-outline-primary fw-semibold me-auto"
+          [disabled]="!selectedProperty?.isAvailable"
+          (click)="unlockProperty()"
+        >
+          Unlock
+        </button>
+        <button
+          type="button"
+          class="btn btn-secondary fw-semibold"
+          data-bs-dismiss="modal"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<!-- <div class="modal fade" id="propertyModal" tabindex="-1" aria-labelledby="propertyModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header bg-primary text-white">
@@ -135,18 +319,16 @@
       </div>
     </div>
   </div>
-</div>
-
-
+</div> -->
 
 <!-- <div class="container mt-4">
     <div>
         <h1 class="text-center mb-4">Explore Available Rental Properties That Match Your Lifestyle</h1>
     </div> -->
-     <!-- Filter and Sort Controls -->
-  <!-- <div class="d-flex justify-content-between mb-4"> -->
-    <!-- Sort Dropdown -->
-    <!-- <div>
+<!-- Filter and Sort Controls -->
+<!-- <div class="d-flex justify-content-between mb-4"> -->
+<!-- Sort Dropdown -->
+<!-- <div>
       <label for="sort" class="font-weight-bold">Sort By:</label>
       <select
         id="sort"
@@ -160,8 +342,8 @@
       </select>
     </div> -->
 
-    <!-- Filter Dropdown -->
-    <!-- <div>
+<!-- Filter Dropdown -->
+<!-- <div>
       <label for="categoryFilter" class="font-weight-bold"
         >Filter By Category:</label
       >

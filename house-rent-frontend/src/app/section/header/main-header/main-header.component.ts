@@ -1,4 +1,4 @@
-import { NgClass, NgIf } from '@angular/common';
+import { NgClass, NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from '../../../core/service/auth/auth.service';
@@ -6,7 +6,7 @@ import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-main-header',
-  imports: [NgIf, RouterModule, NgClass],
+  imports: [NgIf, RouterModule, NgClass, NgFor],
   templateUrl: './main-header.component.html',
   styleUrl: './main-header.component.css'
 })

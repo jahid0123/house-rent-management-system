@@ -11,6 +11,7 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { ManagePostComponent } from './admin/manage-post/manage-post.component';
 import { ManageUserComponent } from './admin/manage-user/manage-user.component';
 import { ManagePackagesComponent } from './admin/manage-packages/manage-packages.component';
+import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 
 export const routes: Routes = [
 
@@ -26,6 +27,7 @@ export const routes: Routes = [
     {path: 'manage-packages', component: ManagePackagesComponent},
     {path: 'manage-post', component: ManagePostComponent},
     {path: 'manage-user', component: ManageUserComponent},
+    {path: 'admin-d', component: AdminDashboardComponent},
     {path: '**', redirectTo: 'home'}
 
 ];

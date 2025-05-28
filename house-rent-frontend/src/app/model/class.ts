@@ -140,7 +140,6 @@ export interface RentPost {
   userId: number;
   contactNumber: string;
   contactPerson: string;
-  area: string;
   availableFrom: string; // ISO Date (e.g., "2025-06-01")
   category: string; // e.g., "SUBLET"
   title: string;

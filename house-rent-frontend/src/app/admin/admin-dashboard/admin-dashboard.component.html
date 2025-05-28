@@ -1,0 +1,67 @@
+<!-- prescription-form.component.html -->
+<div class="container mt-4">
+  <h2 class="mb-4">Doctor Prescription Form</h2>
+
+  <form [formGroup]="prescriptionForm" (ngSubmit)="onSubmit()">
+    <!-- Patient Info -->
+    <div class="row mb-3">
+      <div class="col">
+        <label>Patient Name</label>
+        <input type="text" class="form-control" formControlName="patientName">
+      </div>
+      <div class="col">
+        <label>Age</label>
+        <input type="number" class="form-control" formControlName="age">
+      </div>
+      <div class="col">
+        <label>Gender</label>
+        <select class="form-control" formControlName="gender">
+          <option>Male</option>
+          <option>Female</option>
+          <option>Other</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label>Symptoms</label>
+      <textarea class="form-control" formControlName="symptoms" rows="2"></textarea>
+    </div>
+
+    <div class="mb-3">
+      <label>Diagnosis</label>
+      <textarea class="form-control" formControlName="diagnosis" rows="2"></textarea>
+    </div>
+
+    <!-- Medicine List -->
+    <div formArrayName="medicines" class="mb-3">
+      <div *ngFor="let med of medicineControls.controls; let i = index" [formGroupName]="i" class="card p-3 mb-2">
+        <div class="row">
+          <div class="col-md-4">
+            <label>Medicine Name</label>
+            <input type="text" class="form-control" formControlName="name">
+          </div>
+          <div class="col-md-2">
+            <label>Dosage</label>
+            <input type="text" class="form-control" formControlName="dosage">
+          </div>
+          <div class="col-md-2">
+            <label>Duration</label>
+            <input type="text" class="form-control" formControlName="duration">
+          </div>
+          <div class="col-md-3">
+            <label>Instructions</label>
+            <input type="text" class="form-control" formControlName="instructions">
+          </div>
+          <div class="col-md-1 d-flex align-items-end">
+            <button type="button" class="btn btn-danger" (click)="removeMedicine(i)">X</button>
+          </div>
+        </div>
+      </div>
+
+      <button type="button" class="btn btn-secondary" (click)="addMedicine()">+ Add Medicine</button>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Submit Prescription</button>
+  </form>
+</div>

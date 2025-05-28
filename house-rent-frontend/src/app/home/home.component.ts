@@ -32,6 +32,8 @@ export class HomeComponent implements OnInit {
     this.loadAllProperties();
   }
 
+
+
   loadAllProperties(): void {
     this.homeService.getPostedProperty().subscribe({
       next: (res: GetPostedProperty[]) => {

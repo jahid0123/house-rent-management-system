@@ -1,0 +1,12 @@
+.card-body i {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.card-header {
+  font-size: 1.1rem;
+}
+
+.list-group-item {
+  font-size: 0.95rem;
+}
