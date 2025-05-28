@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Data
 @RequiredArgsConstructor
 @Entity
-@Table(name = "r_property_post")
+@Table(name = "jahid_property_post")
 public class PropertyPost {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,8 +30,8 @@ public class PropertyPost {
     @Column(name = "contact_person", nullable = false)
     private String contactPerson;
 
-    @Column(name = "rent_area", nullable = false)
-    private String area;
+//    @Column(name = "rent_area", nullable = false)
+//    private String area;
 
     @Column(name = "available_from", nullable = false)
     private LocalDate availableFrom;

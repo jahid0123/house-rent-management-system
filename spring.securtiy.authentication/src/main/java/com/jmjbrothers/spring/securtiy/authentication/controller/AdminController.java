@@ -38,8 +38,13 @@ public class AdminController {
 
     //Delete user by id access control by admin
     @DeleteMapping("/delete/user")
-    public String deleteUserById(@RequestParam Long id) {
-        return userInfoDetailsService.deleteUserById(id);
+    public ResponseEntity<?> deleteUserById(@RequestParam Long id) {
+        String deleteUser = userInfoDetailsService.deleteUserById(id);
+        if (deleteUser!=null){
+            return new ResponseEntity<>(HttpStatus.OK);
+        }else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     //Credit Package Creation by the Admin
@@ -77,7 +82,7 @@ public class AdminController {
     public ResponseEntity<?> updatePostedProperty(@RequestBody PropertyPostUpdateDto post) {
 
         PropertyPost allProperty = propertyPostService.updatePostedProperty(post);
-        return ResponseEntity.ok(allProperty);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }

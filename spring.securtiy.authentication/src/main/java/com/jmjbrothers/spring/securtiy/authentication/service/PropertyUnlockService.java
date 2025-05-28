@@ -70,7 +70,7 @@ public class PropertyUnlockService {
         propertyUnlockDto.setDateUnlocked(propertyUnlock.getDateUnlocked());
         propertyUnlockDto.setContactPerson(propertyUnlock.getPropertyPost().getContactPerson());
         propertyUnlockDto.setContactNumber(propertyUnlock.getPropertyPost().getContactNumber());
-        propertyUnlockDto.setArea(propertyUnlock.getPropertyPost().getArea());
+//        propertyUnlockDto.setArea(propertyUnlock.getPropertyPost().getArea());
         propertyUnlockDto.setAvailableFrom(propertyUnlock.getPropertyPost().getAvailableFrom());
         propertyUnlockDto.setCategory(propertyUnlock.getPropertyPost().getProperty().getCategory());
         propertyUnlockDto.setTitle(propertyUnlock.getPropertyPost().getProperty().getTitle());

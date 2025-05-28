@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @RequiredArgsConstructor
@@ -23,4 +24,5 @@ public class GetPostedProperty {
     private String division;
     private String thana;
     private String section;
+    private List<String> imageUrls;
 }

@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "r_credit_package")
+@Table(name = "jahid_credit_package")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

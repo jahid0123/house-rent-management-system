@@ -45,7 +45,7 @@ public class UserController {
         }
 
         userInfoDetailsService.changePassword(request.getUserId(), request.getCurrentPassword(), request.getNewPassword());
-        return ResponseEntity.ok("Password changed successfully");
+        return new ResponseEntity<>(HttpStatus.OK);
     }
     /*@PutMapping("/change-password")
     public ResponseEntity<?> changePassword(@RequestBody PasswordChangeRequestDto request) {
@@ -63,7 +63,7 @@ public class UserController {
     public ResponseEntity<?> editUserById(@RequestBody UserEditDto userEditDto){
         userInfoDetailsService.editUserInfoById(userEditDto);
 
-        return ResponseEntity.ok(Map.of("message", "Profile updated successfully!"));
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 

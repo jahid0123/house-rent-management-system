@@ -2,6 +2,7 @@ package com.jmjbrothers.spring.securtiy.authentication.service;
 
 import com.jmjbrothers.spring.securtiy.authentication.dto.*;
 import com.jmjbrothers.spring.securtiy.authentication.model.Property;
+import com.jmjbrothers.spring.securtiy.authentication.model.PropertyImage;
 import com.jmjbrothers.spring.securtiy.authentication.model.PropertyPost;
 import com.jmjbrothers.spring.securtiy.authentication.model.User;
 import com.jmjbrothers.spring.securtiy.authentication.repository.PropertyPostRepository;
@@ -10,8 +11,18 @@ import com.jmjbrothers.spring.securtiy.authentication.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -23,7 +34,68 @@ public class PropertyPostService {
     private final PropertyPostRepository propertyPostRepository;
 
 
+
+
     @Transactional
+    public PropertyPost postProperty(PropertyPostDto dto, MultipartFile[] images) throws IOException {
+        User user = userRepository.findById(dto.getUserID())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        if (user.getBalanceCredits() < 10) {
+            throw new RuntimeException("Insufficient credits");
+        }
+
+        Property property = new Property();
+        property.setUser(user);
+        property.setCategory(dto.getCategory());
+        property.setTitle(dto.getTitle());
+        property.setDescription(dto.getDescription());
+        property.setAddress(dto.getAddress());
+        property.setRentAmount(dto.getRentAmount());
+        property.setDivision(dto.getDivision());
+        property.setDistrict(dto.getDistrict());
+        property.setThana(dto.getThana());
+        property.setSection(dto.getSection());
+        property.setRoadNumber(dto.getRoadNumber());
+        property.setHouseNumber(dto.getHouseNumber());
+
+        List<String> imagePaths = new ArrayList<>();
+
+        if (images != null && images.length > 0) {
+            Path uploadDir = Paths.get("uploads");
+
+            // Ensure upload directory exists only once
+            Files.createDirectories(uploadDir);
+
+            for (MultipartFile file : images) {
+                String filename = UUID.randomUUID() + "_" + file.getOriginalFilename();
+                Path filePath = uploadDir.resolve(filename);
+
+                Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+                imagePaths.add(filename);
+            }
+        }
+
+        property.setImagePaths(imagePaths);
+        property = propertyRepository.save(property);
+
+        // Deduct credit
+        user.setBalanceCredits(user.getBalanceCredits() - 10);
+        user = userRepository.save(user);
+
+        PropertyPost post = new PropertyPost();
+        post.setUser(user);
+        post.setProperty(property);
+        post.setContactPerson(dto.getContactPerson());
+        post.setContactNumber(dto.getContactNumber());
+        post.setAvailableFrom(dto.getAvailableFrom());
+
+        return propertyPostRepository.save(post);
+    }
+
+
+
+    /*@Transactional
     public PropertyPost postProperty(PropertyPostDto propertyPostDto) {
         User user = userRepository.findById(propertyPostDto.getUserID()).orElseThrow(
                 ()-> new RuntimeException("User not found"));
@@ -65,9 +137,16 @@ public class PropertyPostService {
         propertyPost.setAvailableFrom(propertyPostDto.getAvailableFrom());
 
         return propertyPostRepository.save(propertyPost);
-    }
+    }*/
 
+    /*        //the easy way to mapped list PropertyPost List to GetPostedProperty List
+            List<GetPostedProperty> getPostedPropertyList = new ArrayList<>();
+            for (PropertyPost property : allPostedProperty) {
+                GetPostedProperty dto = getPostedPropertyMapped(property);  // convert it
+                getPostedPropertyList.add(dto);                         // add to new list
+            }
 
+            return getPostedPropertyList;*/
     @Transactional
     public List<GetPostedProperty> getAllPostedProperty() {
 
@@ -80,42 +159,37 @@ public class PropertyPostService {
         return getPostedPropertyList;
 
 
-/*        //the easy way to mapped list PropertyPost List to GetPostedProperty List
-        List<GetPostedProperty> getPostedPropertyList = new ArrayList<>();
-        for (PropertyPost property : allPostedProperty) {
-            GetPostedProperty dto = getPostedPropertyMapped(property);  // convert it
-            getPostedPropertyList.add(dto);                         // add to new list
-        }
-
-        return getPostedPropertyList;*/
     }
 
 
     //Mapped method PropertyPost class to GetPostedProperty
-    private GetPostedProperty getPostedPropertyMapped(PropertyPost property){
-        GetPostedProperty getPostedProperty = new GetPostedProperty();
+    private GetPostedProperty getPostedPropertyMapped(PropertyPost post) {
+        Property property = post.getProperty();
 
-        getPostedProperty.setId(property.getId());
-        getPostedProperty.setCategory(property.getProperty().getCategory());
-        getPostedProperty.setTitle(property.getProperty().getTitle());
-        getPostedProperty.setDescription(property.getProperty().getDescription());
-        getPostedProperty.setIsAvailable(property.getProperty().getIsAvailable());
-        getPostedProperty.setRentAmount(property.getProperty().getRentAmount());
-        getPostedProperty.setDatePosted(property.getDatePosted());
-        getPostedProperty.setAvailableFrom(property.getAvailableFrom());
-        getPostedProperty.setDivision(property.getProperty().getDivision());
-        getPostedProperty.setDistrict(property.getProperty().getDistrict());
-        getPostedProperty.setThana(property.getProperty().getThana());
-        getPostedProperty.setSection(property.getProperty().getSection());
+        GetPostedProperty dto = new GetPostedProperty();
+        dto.setId(post.getId());
+        dto.setCategory(property.getCategory());
+        dto.setTitle(property.getTitle());
+        dto.setDescription(property.getDescription());
+        dto.setIsAvailable(property.getIsAvailable());
+        dto.setRentAmount(property.getRentAmount());
+        dto.setDatePosted(post.getDatePosted());
+        dto.setAvailableFrom(post.getAvailableFrom());
+        dto.setDivision(property.getDivision());
+        dto.setDistrict(property.getDistrict());
+        dto.setThana(property.getThana());
+        dto.setSection(property.getSection());
+        dto.setImageUrls(post.getProperty().getImagePaths());
 
-        return getPostedProperty;
+        return dto;
     }
 
+
     @Transactional
-    public List<MyPostPropertyResponseDto> allPropertyPostedByMe(Long id) {
+    public List<GetPostedProperty> allPropertyPostedByMe(Long id) {
         List<PropertyPost> allPropertyUnlock = propertyPostRepository.findAllByUserId(id);
 
-        List<MyPostPropertyResponseDto> myAllProperty = allPropertyUnlock.stream().map(this::myPostPropertyResponseDto).collect(Collectors.toList());
+        List<GetPostedProperty> myAllProperty = allPropertyUnlock.stream().map(this::getPostedPropertyMapped).collect(Collectors.toList());
         return myAllProperty;
     }
 
@@ -127,7 +201,7 @@ public class PropertyPostService {
         myPost.setId(propertyPost.getId());
         myPost.setContactNumber(propertyPost.getContactNumber());
         myPost.setContactPerson(propertyPost.getContactPerson());
-        myPost.setArea(propertyPost.getArea());
+//        myPost.setArea(propertyPost.getArea());
         myPost.setAvailableFrom(propertyPost.getAvailableFrom());
         myPost.setCategory(propertyPost.getProperty().getCategory());
         myPost.setTitle(propertyPost.getProperty().getTitle());
@@ -188,7 +262,7 @@ public class PropertyPostService {
 
         propertyPost.setContactNumber(propertyDto.getContactNumber());
         propertyPost.setContactPerson(propertyDto.getContactPerson());
-        propertyPost.setArea(propertyDto.getArea());
+//        propertyPost.setArea(propertyDto.getArea());
         propertyPost.setAvailableFrom(propertyDto.getAvailableFrom());
 
 
@@ -209,7 +283,7 @@ public class PropertyPostService {
         myPost.setUserId(propertyPost.getUser().getId());
         myPost.setContactNumber(propertyPost.getContactNumber());
         myPost.setContactPerson(propertyPost.getContactPerson());
-        myPost.setArea(propertyPost.getArea());
+//        myPost.setArea(propertyPost.getArea());
         myPost.setAvailableFrom(propertyPost.getAvailableFrom());
         myPost.setCategory(propertyPost.getProperty().getCategory());
         myPost.setTitle(propertyPost.getProperty().getTitle());

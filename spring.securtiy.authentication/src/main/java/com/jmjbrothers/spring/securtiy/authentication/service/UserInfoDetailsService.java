@@ -68,7 +68,7 @@ public class UserInfoDetailsService implements UserDetailsService {
             userRepository.deleteById(id);
             return "User deleted successfully!";
         }else {
-            return "User not found by the id: " + id;
+            return null;
         }
     }
 

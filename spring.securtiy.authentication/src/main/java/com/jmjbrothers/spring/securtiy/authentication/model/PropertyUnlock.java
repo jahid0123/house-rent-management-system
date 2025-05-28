@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Data
 @RequiredArgsConstructor
 @Entity
-@Table(name = "r_property_unlocks")
+@Table(name = "jahid_property_unlocks")
 public class PropertyUnlock {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
