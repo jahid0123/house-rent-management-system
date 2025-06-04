@@ -1,20 +1,19 @@
-import { Component, NgModule, numberAttribute, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { GetPostedProperty } from '../model/class';
-import { Router } from '@angular/router';
-import { HomeService } from './service/home.service';
-import { CommonModule, NgClass, NgFor, NgStyle } from '@angular/common';
 import { Modal } from 'bootstrap';
-import { FormsModule, NgModel } from '@angular/forms';
-import { MainHeaderComponent } from "../section/header/main-header/main-header.component";
+import { HomeService } from '../home/service/home.service';
+import { Router } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule, NgFor, NgIf } from '@angular/common';
+import { MainHeaderComponent } from '../section/header/main-header/main-header.component';
 
 @Component({
-  selector: 'app-home',
-  imports: [NgClass, NgFor, FormsModule, CommonModule],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  selector: 'app-launcher-dashboard',
+  imports: [ReactiveFormsModule, CommonModule, NgFor, NgIf, FormsModule, MainHeaderComponent],
+  templateUrl: './launcher-dashboard.component.html',
+  styleUrl: './launcher-dashboard.component.css'
 })
-
-export class HomeComponent implements OnInit {
+export class LauncherDashboardComponent implements OnInit {
   getAllPostedProperty: GetPostedProperty[] = [];
   displayedProperties: GetPostedProperty[] = [];
   paginatedProperties: GetPostedProperty[] = [];
@@ -134,7 +133,6 @@ export class HomeComponent implements OnInit {
 
     if (!userId || !propertyPostId) {
       this.router.navigateByUrl('/login');
-      alert('User or property information is missing!');
       return;
     }
 
@@ -220,4 +218,3 @@ export class HomeComponent implements OnInit {
 // }
 
 // }
-

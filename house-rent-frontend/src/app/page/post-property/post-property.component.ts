@@ -116,7 +116,7 @@ export class PostPropertyComponent implements OnInit {
             this.propertyForm.reset();
             this.previewUrls = [];
             this.selectedFiles = [];
-            this.router.navigateByUrl('/home');
+            this.router.navigateByUrl('/user-dashboard/home');
           },
           error: (err) => {
             console.error('Post error:', err);

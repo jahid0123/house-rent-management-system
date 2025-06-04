@@ -91,7 +91,7 @@ export class MyPropertyComponent implements OnInit {
           alert('Information updated successfully.');
           this.closeModal();
           this.loadUserInfo();
-          this.router.navigateByUrl('/my-property');
+          this.router.navigateByUrl('/user-dashboard/my-property');
         },
         error: () => {
           alert('Data not update!!!');

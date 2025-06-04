@@ -1,17 +1,13 @@
-<nav
-  class="navbar navbar-expand-lg px-4 py-2 shadow-sm"
-  [ngClass]="{
-    'bg-primary bg-gradient': !role,
-    'bg-success bg-gradient': role === 'USER',
-    'bg-dark bg-gradient': role === 'ADMIN'
-  }"
->
-  <a class="navbar-brand text-white fw-bold fs-5 d-flex align-items-center" [routerLink]="['/home']">
-    <i class="bi bi-house-door-fill me-2 fs-4"></i>RENT HOUSE
+<nav class="navbar navbar-expand-lg bg-dark px-4 py-3 shadow-sm">
+  <a
+    class="navbar-brand d-flex align-items-center text-white fw-bold fs-4"
+    [routerLink]="['/home']"
+  >
+    <i class="bi bi-house-door-fill text-warning fs-3 me-2"></i>RENT HOUSE
   </a>
 
   <button
-    class="navbar-toggler border-0"
+    class="navbar-toggler border-0 text-white"
     type="button"
     data-bs-toggle="collapse"
     data-bs-target="#navbarNav"
@@ -19,100 +15,15 @@
     aria-expanded="false"
     aria-label="Toggle navigation"
   >
-    <span class="navbar-toggler-icon"></span>
+    <i class="bi bi-list fs-2"></i>
   </button>
 
-  <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
-    
-    <!-- Left menu for USER -->
-    <ul class="navbar-nav me-auto" *ngIf="role === 'USER'">
-      <li class="nav-item" *ngFor="let item of [
-        { route: '/home', icon: 'bi-house-fill', label: 'Home' },
-        { route: '/post-property', icon: 'bi-plus-square-fill', label: 'Post Property' },
-        { route: '/buy-package', icon: 'bi-box-fill', label: 'Buy Package' }
-      ]">
-        <a class="nav-link text-white fw-medium" [routerLink]="[item.route]">
-          <i class="bi {{ item.icon }} me-1"></i>{{ item.label }}
-        </a>
-      </li>
-    </ul>
-
-    <!-- Left menu for ADMIN -->
-    <ul class="navbar-nav me-auto" *ngIf="role === 'ADMIN'">
-      <li class="nav-item" *ngFor="let item of [
-        { route: '/dashboard', icon: 'bi-speedometer2', label: 'Dashboard' },
-        { route: '/manage-user', icon: 'bi-people-fill', label: 'Manage Users' },
-        { route: '/manage-packages', icon: 'bi-boxes', label: 'Manage Packages' },
-        { route: '/manage-post', icon: 'bi-file-post', label: 'Manage Post' }
-      ]">
-        <a class="nav-link text-white fw-medium" [routerLink]="[item.route]">
-          <i class="bi {{ item.icon }} me-1"></i>{{ item.label }}
-        </a>
-      </li>
-    </ul>
-
-    <!-- Right: Not Logged In -->
+  <div class="collapse navbar-collapse justify-content-end mt-2 mt-lg-0" id="navbarNav">
+    <!-- Show login button if not logged in -->
     <div *ngIf="!role">
-      <a class="btn btn-outline-light fw-semibold" [routerLink]="['/login']">
-        <i class="bi bi-box-arrow-in-right me-1"></i>Login
+      <a class="btn btn-warning text-dark fw-semibold px-4 py-2 rounded-pill" [routerLink]="['/login']">
+        <i class="bi bi-box-arrow-in-right me-2"></i>Login
       </a>
     </div>
-
-    <!-- Right: User/Admin Dropdown -->
-    <ul class="navbar-nav" *ngIf="role === 'USER' || role === 'ADMIN'">
-      <li class="nav-item dropdown">
-        <a
-          class="nav-link dropdown-toggle d-flex align-items-center text-white"
-          href="#"
-          id="userDropdown"
-          role="button"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
-          <img
-            [src]="user.avatarUrl || 'https://i.pravatar.cc/40'"
-            alt="Avatar"
-            width="32"
-            height="32"
-            class="rounded-circle me-2 border border-light"
-          />
-          <span class="fw-semibold">{{ user.name }}</span>
-        </a>
-
-        <ul class="dropdown-menu dropdown-menu-end shadow-sm rounded-3">
-          <li>
-            <a class="dropdown-item" [routerLink]="['/profile']">
-              <i class="bi bi-person-circle me-2"></i>Profile
-            </a>
-          </li>
-
-          <!-- USER specific links -->
-          <ng-container *ngIf="role === 'USER'">
-            <li>
-              <a class="dropdown-item" [routerLink]="['/my-property']">
-                <i class="bi bi-houses me-2"></i>My Properties
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-item" [routerLink]="['/unlock-property']">
-                <i class="bi bi-unlock me-2"></i>Unlock Property
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-item" [routerLink]="['/purchase-history']">
-                <i class="bi bi-receipt me-2"></i>Purchase History
-              </a>
-            </li>
-          </ng-container>
-
-          <li><hr class="dropdown-divider" /></li>
-          <li>
-            <a class="dropdown-item text-danger fw-semibold" (click)="logout()">
-              <i class="bi bi-box-arrow-right me-2"></i>Logout
-            </a>
-          </li>
-        </ul>
-      </li>
-    </ul>
   </div>
 </nav>

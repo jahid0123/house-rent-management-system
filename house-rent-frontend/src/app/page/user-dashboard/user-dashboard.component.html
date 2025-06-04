@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg bg-dark px-4 py-3 shadow-sm">
-  <a class="navbar-brand text-white fw-bold d-flex align-items-center fs-4" [routerLink]="['/admin-dashboard/home']">
+  <a class="navbar-brand text-white fw-bold d-flex align-items-center fs-4" [routerLink]="['/user-dashboard/home']">
     <i class="bi bi-house-door-fill me-2 fs-3 text-warning"></i>RENT HOUSE
   </a>
 
@@ -16,21 +16,21 @@
   </button>
 
   <div class="collapse navbar-collapse justify-content-between mt-2 mt-lg-0" id="navbarNav">
-    <!-- Left menu for ADMIN -->
+
+    <!-- Left: Navigation Links -->
     <ul class="navbar-nav me-auto">
       <li class="nav-item" *ngFor="let item of [
-          { route: '/admin-dashboard/dashboard', icon: 'bi-speedometer2', label: 'Dashboard' },
-          { route: '/admin-dashboard/manage-user', icon: 'bi-people-fill', label: 'Manage Users' },
-          { route: '/admin-dashboard/manage-packages', icon: 'bi-boxes', label: 'Manage Packages' },
-          { route: '/admin-dashboard/manage-post', icon: 'bi-file-post', label: 'Manage Post' }
-        ]">
-        <a class="nav-link text-white px-3 py-2 rounded fw-medium hover-bg-light" [routerLink]="[item.route]">
+        { route: '/user-dashboard/home', icon: 'bi-house-fill', label: 'Home' },
+        { route: '/user-dashboard/post-property', icon: 'bi-plus-square-fill', label: 'Post Property' },
+        { route: '/user-dashboard/buy-package', icon: 'bi-box-fill', label: 'Buy Package' }
+      ]">
+        <a class="nav-link text-white px-3 py-2 rounded hover-bg-light" [routerLink]="[item.route]">
           <i class="bi {{ item.icon }} me-2"></i>{{ item.label }}
         </a>
       </li>
     </ul>
 
-    <!-- Right: User/Admin Dropdown -->
+    <!-- Right: User Dropdown -->
     <ul class="navbar-nav">
       <li class="nav-item dropdown">
         <a
@@ -42,19 +42,34 @@
           aria-expanded="false"
         >
           <img
-            src="https://i.pravatar.cc/40"
+            [src]="'https://i.pravatar.cc/40'"
             alt="Avatar"
             width="36"
             height="36"
             class="rounded-circle me-2 border border-warning border-2"
           />
-          <span class="d-none d-md-inline fw-semibold">Admin</span>
+          <span class="d-none d-md-inline fw-semibold">User</span>
         </a>
 
         <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 rounded-3 mt-2">
           <li>
-            <a class="dropdown-item" [routerLink]="['/admin-dashboard/profile']">
+            <a class="dropdown-item" [routerLink]="['/user-dashboard/profile']">
               <i class="bi bi-person-circle me-2"></i>Profile
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" [routerLink]="['/user-dashboard/my-property']">
+              <i class="bi bi-houses me-2"></i>My Properties
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" [routerLink]="['/user-dashboard/unlock-property']">
+              <i class="bi bi-unlock me-2"></i>Unlock Property
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" [routerLink]="['/user-dashboard/purchase-history']">
+              <i class="bi bi-receipt me-2"></i>Purchase History
             </a>
           </li>
           <li><hr class="dropdown-divider" /></li>
@@ -68,4 +83,5 @@
     </ul>
   </div>
 </nav>
+
 <router-outlet></router-outlet>

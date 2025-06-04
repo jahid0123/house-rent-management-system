@@ -45,7 +45,7 @@ export class BuyPackageComponent implements OnInit {
     this.buyPackageService.buyPackage(buyPackage).subscribe({
       next: (res) => {
         alert('Package purchased successfully.');
-        this.router.navigateByUrl('/profile');
+        this.router.navigateByUrl('/user-dashboard/profile');
       },
       error: (err) => {
         alert('Purchase request failed!!');

@@ -6,7 +6,7 @@ import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-main-header',
-  imports: [NgIf, RouterModule, NgClass, NgFor],
+  imports: [NgIf, RouterModule],
   templateUrl: './main-header.component.html',
   styleUrl: './main-header.component.css'
 })

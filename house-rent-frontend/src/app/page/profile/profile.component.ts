@@ -89,6 +89,7 @@ export class ProfileComponent implements OnInit {
         alert("Successfully updated!")
         //alert(res.message); // 👈 Only shows "Profile updated successfully!"
         this.editForm.reset();
+        // this.ngOnInit();
         
       },
       error: (err) => {

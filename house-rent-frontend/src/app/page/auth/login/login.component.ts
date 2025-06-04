@@ -9,10 +9,11 @@ import { AuthService } from '../../../core/service/auth/auth.service';
 import { CommonModule } from '@angular/common';
 import { Modal } from 'bootstrap';
 import { Router } from '@angular/router';
+import { MainHeaderComponent } from "../../../section/header/main-header/main-header.component";
 
 @Component({
   selector: 'app-login',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, MainHeaderComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
@@ -49,9 +50,9 @@ export class LoginComponent {
           alert('Login successful');
 
           if (res.role === 'USER') {
-            this.router.navigate(['/home']);
+            this.router.navigateByUrl('/user-dashboard');
           } else if (res.role === 'ADMIN') {
-            this.router.navigate(['/admin-dashboard']);
+            this.router.navigateByUrl('/admin-dashboard');
           }
         },
         error: () => {
