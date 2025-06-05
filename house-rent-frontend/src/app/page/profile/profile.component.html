@@ -1,10 +1,11 @@
+<!-- Profile Card -->
 <div class="container mt-5">
   <div class="row justify-content-center">
-    <div class="col-md-6">
+    <div class="col-lg-6">
       <div class="card shadow rounded-4 border-0">
-        <div class="card-body">
-          <h4 class="card-title text-primary mb-3">
-            <i class="bi bi-person-fill me-2"></i>Profile Information
+        <div class="card-body p-4">
+          <h4 class="card-title text-primary mb-4 d-flex align-items-center">
+            <i class="bi bi-person-fill me-2 fs-4"></i> Profile Information
           </h4>
 
           <ul class="list-group list-group-flush mb-4">
@@ -22,12 +23,12 @@
             </li>
           </ul>
 
-          <div class="d-flex justify-content-between">
-            <button class="btn btn-outline-primary w-48" data-bs-toggle="modal" data-bs-target="#editModal">
-              <i class="bi bi-pencil-square me-1"></i>Edit Info
+          <div class="d-flex gap-3 justify-content-center">
+            <button class="btn btn-outline-primary px-4" data-bs-toggle="modal" data-bs-target="#editModal">
+              <i class="bi bi-pencil-square me-1"></i> Edit Info
             </button>
-            <button class="btn btn-outline-warning w-48" data-bs-toggle="modal" data-bs-target="#passwordModal">
-              <i class="bi bi-lock-fill me-1"></i>Change Password
+            <button class="btn btn-outline-warning px-4" data-bs-toggle="modal" data-bs-target="#passwordModal">
+              <i class="bi bi-lock-fill me-1"></i> Change Password
             </button>
           </div>
         </div>
@@ -39,23 +40,27 @@
 <!-- Edit Info Modal -->
 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <form [formGroup]="editForm" (ngSubmit)="submitEdit()" class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="editModalLabel">Edit Profile</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <form [formGroup]="editForm" (ngSubmit)="submitEdit()" class="modal-content border-0 rounded-4 shadow">
+      <div class="modal-header bg-primary text-white rounded-top-4">
+        <h5 class="modal-title" id="editModalLabel"><i class="bi bi-pencil-square me-1"></i> Edit Profile</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body p-4">
         <div class="mb-3">
-          <label for="editName" class="form-label">Name</label>
-          <input type="text" id="editName" class="form-control" formControlName="name" />
+          <label for="editName" class="form-label">Full Name</label>
+          <input type="text" id="editName" class="form-control" formControlName="name" [class.is-invalid]="editForm.get('name')?.invalid && editForm.get('name')?.touched" />
+          <div class="invalid-feedback">Name is required.</div>
         </div>
         <div class="mb-3">
-          <label for="editPhone" class="form-label">Phone</label>
-          <input type="text" id="editPhone" class="form-control" formControlName="phone" />
+          <label for="editPhone" class="form-label">Phone Number</label>
+          <input type="text" id="editPhone" class="form-control" formControlName="phone" [class.is-invalid]="editForm.get('phone')?.invalid && editForm.get('phone')?.touched" />
+          <div class="invalid-feedback">Phone number is required.</div>
         </div>
       </div>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Save Changes</button>
+      <div class="modal-footer px-4 pb-4">
+        <button type="submit" class="btn btn-primary w-100">
+          <i class="bi bi-save me-1"></i> Save Changes
+        </button>
       </div>
     </form>
   </div>
@@ -64,27 +69,32 @@
 <!-- Change Password Modal -->
 <div class="modal fade" id="passwordModal" tabindex="-1" aria-labelledby="passwordModalLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <form [formGroup]="passwordForm" (ngSubmit)="submitPasswordChange()" class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="passwordModalLabel">Change Password</h5>
+    <form [formGroup]="passwordForm" (ngSubmit)="submitPasswordChange()" class="modal-content border-0 rounded-4 shadow">
+      <div class="modal-header bg-warning text-dark rounded-top-4">
+        <h5 class="modal-title" id="passwordModalLabel"><i class="bi bi-lock-fill me-1"></i> Change Password</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body p-4">
         <div class="mb-3">
           <label class="form-label">Current Password</label>
-          <input type="password" class="form-control" formControlName="currentPassword" />
+          <input type="password" class="form-control" formControlName="currentPassword" [class.is-invalid]="passwordForm.get('currentPassword')?.invalid && passwordForm.get('currentPassword')?.touched" />
+          <div class="invalid-feedback">Current password is required.</div>
         </div>
         <div class="mb-3">
           <label class="form-label">New Password</label>
-          <input type="password" class="form-control" formControlName="newPassword" />
+          <input type="password" class="form-control" formControlName="newPassword" [class.is-invalid]="passwordForm.get('newPassword')?.invalid && passwordForm.get('newPassword')?.touched" />
+          <div class="invalid-feedback">New password must be at least 6 characters.</div>
         </div>
         <div class="mb-3">
           <label class="form-label">Confirm Password</label>
-          <input type="password" class="form-control" formControlName="confirmPassword" />
+          <input type="password" class="form-control" formControlName="confirmPassword" [class.is-invalid]="passwordForm.get('confirmPassword')?.invalid && passwordForm.get('confirmPassword')?.touched" />
+          <div class="invalid-feedback">Please confirm the password.</div>
         </div>
       </div>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-warning">Update Password</button>
+      <div class="modal-footer px-4 pb-4">
+        <button type="submit" class="btn btn-warning w-100">
+          <i class="bi bi-shield-lock me-1"></i> Update Password
+        </button>
       </div>
     </form>
   </div>

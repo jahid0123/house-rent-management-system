@@ -3,7 +3,12 @@ import { GetUserInfo } from '../../model/class';
 import { ProfileService } from './service/profile.service';
 import { Router } from '@angular/router';
 import { Modal } from 'bootstrap';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
@@ -11,9 +16,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css',
 })
-
 export class ProfileComponent implements OnInit {
-
   getUserInfo: GetUserInfo | undefined;
 
   editForm!: FormGroup;
@@ -33,13 +36,13 @@ export class ProfileComponent implements OnInit {
   initForms(): void {
     this.editForm = this.fb.group({
       name: ['', Validators.required],
-      phone: ['', Validators.required]
+      phone: ['', Validators.required],
     });
 
     this.passwordForm = this.fb.group({
       currentPassword: ['', Validators.required],
       newPassword: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', Validators.required]
+      confirmPassword: ['', Validators.required],
     });
   }
 
@@ -53,12 +56,12 @@ export class ProfileComponent implements OnInit {
 
         this.editForm.patchValue({
           name: res.name,
-          phone: res.phone
+          phone: res.phone,
         });
       },
       error: (err) => {
         console.error('Failed to load user info:', err);
-      }
+      },
     });
   }
 
@@ -72,72 +75,75 @@ export class ProfileComponent implements OnInit {
     modal.show();
   }
 
- submitEdit(): void {
-  const userId = Number(localStorage.getItem('id'));
+  submitEdit(): void {
+    const userId = Number(localStorage.getItem('id'));
 
-  if (this.editForm.valid) {
-    const { name, phone } = this.editForm.value;
+    if (this.editForm.valid) {
+      const { name, phone } = this.editForm.value;
 
-    const updatedData = {
-      userId,
-      name,
-      phone,
-    };
+      const updatedData = {
+        userId,
+        name,
+        phone,
+      };
 
-    this.profileService.editUserInfo(updatedData).subscribe({
-      next: (res) => {
-        alert("Successfully updated!")
-        //alert(res.message); // 👈 Only shows "Profile updated successfully!"
-        this.editForm.reset();
-        // this.ngOnInit();
-        
-      },
-      error: (err) => {
-        alert(err.error.message || 'Failed to update user information!');
-      },
-    });
-  }
-}
+      this.profileService.editUserInfo(updatedData).subscribe({
+        next: (res) => {
+          alert('Successfully updated!');
+          this.editForm.reset();
+          this.loadUserInfo();
 
-
-
- submitPasswordChange(): void {
-  const userId = Number(localStorage.getItem('id'));
-
-  if (this.passwordForm.valid) {
-    const { currentPassword, newPassword, confirmPassword } = this.passwordForm.value;
-
-    if (newPassword !== confirmPassword) {
-      alert('New Password and Confirm Password do not match!');
-      return;
+          const modal = Modal.getInstance(
+            document.getElementById('editModal')!
+          );
+          modal?.hide();
+        },
+        error: (err) => {
+          alert(err.error.message || 'Failed to update user information!');
+        },
+      });
     }
+  }
 
-    const passwordData = {
-      userId,
-      currentPassword,
-      newPassword,
-    };
+  submitPasswordChange(): void {
+    const userId = Number(localStorage.getItem('id'));
 
-    this.profileService.changePassword(passwordData).subscribe({
-      next: () => {
-        alert('Password changed successfully!');
-        this.passwordForm.reset();
-      },
-      error: (err) => {
-        alert(err.error.message || 'Failed to change password!');
-      },
-    });
+    if (this.passwordForm.valid) {
+      const { currentPassword, newPassword, confirmPassword } =
+        this.passwordForm.value;
+
+      if (newPassword !== confirmPassword) {
+        alert('New Password and Confirm Password do not match!');
+        return;
+      }
+
+      const passwordData = {
+        userId,
+        currentPassword,
+        newPassword,
+      };
+
+      this.profileService.changePassword(passwordData).subscribe({
+        next: () => {
+          alert('Password changed successfully!');
+          this.passwordForm.reset();
+
+          const modal = Modal.getInstance(
+            document.getElementById('passwordModal')!
+          );
+          modal?.hide();
+        },
+        error: (err) => {
+          alert(err.error.message || 'Failed to change password!');
+        },
+      });
+    }
   }
 }
-
-}
-
 
 // export class ProfileComponent implements OnInit {
- 
- 
-//   getUserInfo: GetUserInfo | undefined;
 
+//   getUserInfo: GetUserInfo | undefined;
 
 //   constructor(private profileService: ProfileService, private router: Router) {}
 

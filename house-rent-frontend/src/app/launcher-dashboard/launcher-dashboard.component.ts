@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { GetPostedProperty } from '../model/class';
 import { Modal } from 'bootstrap';
 import { HomeService } from '../home/service/home.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { MainHeaderComponent } from '../section/header/main-header/main-header.component';
 
 @Component({
   selector: 'app-launcher-dashboard',
-  imports: [ReactiveFormsModule, CommonModule, NgFor, NgIf, FormsModule, MainHeaderComponent],
+  imports: [ReactiveFormsModule, CommonModule, NgFor, NgIf, FormsModule, RouterModule],
   templateUrl: './launcher-dashboard.component.html',
   styleUrl: './launcher-dashboard.component.css'
 })

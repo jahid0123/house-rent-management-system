@@ -1,4 +1,33 @@
-<app-main-header></app-main-header>
+<nav class="navbar navbar-expand-lg bg-dark px-4 py-3 shadow-sm">
+  <a
+    class="navbar-brand d-flex align-items-center text-white fw-bold fs-4"
+    [routerLink]="['/home']"
+  >
+    <i class="bi bi-house-door-fill text-warning fs-3 me-2"></i>RENT HOUSE
+  </a>
+
+  <button
+    class="navbar-toggler border-0 text-white"
+    type="button"
+    data-bs-toggle="collapse"
+    data-bs-target="#navbarNav"
+    aria-controls="navbarNav"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <i class="bi bi-list fs-2"></i>
+  </button>
+
+  <div class="collapse navbar-collapse justify-content-end mt-2 mt-lg-0" id="navbarNav">
+    <!-- Show login button if not logged in -->
+    <div>
+      <a class="btn btn-warning text-dark fw-semibold px-4 py-2 rounded-pill" [routerLink]="['/login']">
+        <i class="bi bi-box-arrow-in-right me-2"></i>Login
+      </a>
+    </div>
+  </div>
+</nav>
+
 <div class="container mt-4">
   <div>
     <h1 class="text-center mb-4">
