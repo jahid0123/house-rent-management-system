@@ -2,7 +2,6 @@ package com.jmjbrothers.spring.securtiy.authentication.service;
 
 import com.jmjbrothers.spring.securtiy.authentication.dto.*;
 import com.jmjbrothers.spring.securtiy.authentication.model.Property;
-import com.jmjbrothers.spring.securtiy.authentication.model.PropertyImage;
 import com.jmjbrothers.spring.securtiy.authentication.model.PropertyPost;
 import com.jmjbrothers.spring.securtiy.authentication.model.User;
 import com.jmjbrothers.spring.securtiy.authentication.repository.PropertyPostRepository;
@@ -13,14 +12,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
