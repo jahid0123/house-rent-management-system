@@ -3,9 +3,7 @@ import { AuthService } from '../service/auth/auth.service';
 import { inject } from '@angular/core';
 
 export const authGuard: CanActivateFn = (route, state) => {
-
-  
-   const router = inject(Router);
+  const router = inject(Router);
   const authService = inject(AuthService);
 
   const isLoggedIn = authService.isLoggedIn;
@@ -19,7 +17,7 @@ export const authGuard: CanActivateFn = (route, state) => {
   }
 
   if (allowedRoles && !allowedRoles.includes(userRole)) {
-    router.navigateByUrl('/login'); 
+    router.navigateByUrl('/login');
     return false;
   }
 
