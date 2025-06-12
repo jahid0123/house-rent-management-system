@@ -95,7 +95,7 @@ export class ManagePackagesComponent implements OnInit {
           alert('Edited successfully.');
           this.closeModal();
           this.loadAllPackages();
-          this.router.navigateByUrl('/manage-packages');
+          this.router.navigateByUrl('/admin-dashboard/manage-packages');
         },
         error: (err) => {
           console.error('Update failed:', err);
@@ -110,7 +110,7 @@ export class ManagePackagesComponent implements OnInit {
           alert('Add package successfully.');
           this.closeModal();
           this.loadAllPackages();
-          this.router.navigateByUrl('/manage-packages');
+          this.router.navigateByUrl('/admin-dashboard/manage-packages');
         },
         error: (err) => {
           console.error('Create failed:', err);
@@ -124,7 +124,7 @@ export class ManagePackagesComponent implements OnInit {
     if (confirm('Are you sure you want to delete this package?')) {
       this.manageService.deletePackage(id).subscribe(() => {
         this.loadAllPackages();
-        this.router.navigateByUrl('/manage-packages');
+        this.router.navigateByUrl('/admin-dashboard/manage-packages');
       });
     }
   }

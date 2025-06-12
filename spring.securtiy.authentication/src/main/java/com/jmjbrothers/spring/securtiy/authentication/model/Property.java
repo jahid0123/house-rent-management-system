@@ -61,7 +61,7 @@ public class Property {
     private String address;
 
     @ElementCollection
-    private List<String> imagePaths;
+    private List<String> imageListPaths;
 
     @Column(name = "date_posted", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDate datePosted = LocalDate.now();

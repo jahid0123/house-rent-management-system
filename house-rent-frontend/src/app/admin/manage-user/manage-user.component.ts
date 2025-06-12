@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class ManageUserComponent implements OnInit {
   users: User[] = [];
+  admins: User[] = [];
 
   constructor(private userService: ManageUserService, private router: Router) {}
 
@@ -25,7 +26,8 @@ export class ManageUserComponent implements OnInit {
   
       this.userService.getAllUser().subscribe({
         next: (res: User[]) => {
-          this.users = res;
+          this.users = res.filter(user => user.role === 'USER');
+          this.admins = res.filter(user => user.role === 'ADMIN');
         },
         error: (err) => {
           console.error('Failed to load user info:', err);

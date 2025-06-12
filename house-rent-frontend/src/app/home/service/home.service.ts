@@ -10,7 +10,7 @@ import { GetPostedProperty } from '../../model/class';
 export class HomeService {
 
 
-  private getPostedPropertyURL = 'http://localhost:8080/api/user/all/posted/property';
+  private getPostedPropertyURL = 'http://localhost:8080/api/user/all/posted/properties';
   private postUnlockPropertyURl = 'http://localhost:8080/api/user/property/unlock';
 
   constructor(private http: HttpClient) {}

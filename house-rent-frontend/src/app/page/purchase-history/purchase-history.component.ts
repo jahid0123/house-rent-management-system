@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MyPurchasePackageHistory } from '../../model/class';
 import { PurchaseHistoryService } from './service/purchase-history.service';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-purchase-history',
-  imports: [NgFor],
+  imports: [NgFor, NgIf],
   templateUrl: './purchase-history.component.html',
   styleUrl: './purchase-history.component.css'
 })

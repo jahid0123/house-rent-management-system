@@ -143,11 +143,12 @@ export class HomeComponent implements OnInit {
       this.homeService.unlockProperty(userId, propertyPostId).subscribe({
         next: () => {
           alert('Property unlocked successfully!');
-          this.router.navigateByUrl("/unlock-property");
+          this.router.navigateByUrl("/user-dashboard/unlock-property");
         },
         error: (err) => {
           console.error('Unlock failed:', err);
-          alert('Failed to unlock property.');
+          alert('You dont have enough credit, Please buy credit first!!.');
+          this.router.navigateByUrl("/user-dashboard/buy-package");
         },
       });
     }

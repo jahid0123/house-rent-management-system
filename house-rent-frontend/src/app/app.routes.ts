@@ -15,6 +15,7 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
 import { authGuard } from './core/guard/auth.guard';
 import { UserDashboardComponent } from './page/user-dashboard/user-dashboard.component';
 import { LauncherDashboardComponent } from './launcher-dashboard/launcher-dashboard.component';
+import { AdminListComponent } from './admin/admin-list/admin-list.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'launcher', pathMatch: 'full' },
@@ -52,6 +53,7 @@ export const routes: Routes = [
       { path: 'manage-packages', component: ManagePackagesComponent },
       { path: 'manage-post', component: ManagePostComponent },
       { path: 'manage-user', component: ManageUserComponent },
+      { path: 'admin-list', component: AdminListComponent },
       { path: '**', redirectTo: 'dashboard' },
     ],
   },

@@ -60,72 +60,73 @@
     </div>
   </div>
 
- <!-- Property Cards -->
-<div class="row row-cols-1 row-cols-md-3 g-4">
-  <div class="col" *ngFor="let property of paginatedProperties">
-    <div class="card h-100 shadow-lg border-0 rounded-4 overflow-hidden">
-      
-      <!-- Image with rounded top corners -->
-      <div class="position-relative overflow-hidden" style="height: 220px;">
-        <img
-          [src]="
-            property.imageUrls && property.imageUrls.length > 0
-              ? 'http://localhost:8080/api/user/property/image/' + property.imageUrls[0]
-              : 'default-property.jpg'
-          "
-          alt="Property Image"
-          class="w-100 h-100 object-fit-cover"
-          style="border-top-left-radius: 1rem; border-top-right-radius: 1rem;"
-        />
-        <!-- Status badge top-left -->
-        <span
-          class="position-absolute top-0 start-0 m-3 px-3 py-1 rounded-pill text-white fs-6"
-          [ngClass]="property.isAvailable ? 'bg-success' : 'bg-secondary'"
-          style="backdrop-filter: brightness(0.8);"
-        >
-          {{ property.isAvailable ? 'Available' : 'Not Available' }}
-        </span>
-      </div>
+  <!-- Property Cards -->
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col" *ngFor="let property of paginatedProperties">
+      <div class="card h-100 shadow-lg border-0 rounded-4 overflow-hidden">
+        <!-- Image with rounded top corners -->
+        <div class="position-relative overflow-hidden" style="height: 220px">
+          <img
+            [src]="
+              property.imageUrls && property.imageUrls.length > 0
+                ? 'http://localhost:8080/api/user/image/paths/' +
+                  property.imageUrls[0]
+                : 'default-property.jpg'
+            "
+            alt="Property Image"
+            class="w-100 h-100 object-fit-cover"
+            style="border-top-left-radius: 1rem; border-top-right-radius: 1rem"
+          />
+          <!-- Status badge top-left -->
+          <span
+            class="position-absolute top-0 start-0 m-3 px-3 py-1 rounded-pill text-white fs-6"
+            [ngClass]="property.isAvailable ? 'bg-success' : 'bg-secondary'"
+            style="backdrop-filter: brightness(0.8)"
+          >
+            {{ property.isAvailable ? "Available" : "Not Available" }}
+          </span>
+        </div>
 
-      <div class="card-body d-flex flex-column">
-        <h5 class="card-title fw-bold mb-1">{{ property.title }}</h5>
-        <h6 class="card-subtitle text-muted mb-3">{{ property.category }}</h6>
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title fw-bold mb-1">{{ property.title }}</h5>
+          <h6 class="card-subtitle text-muted mb-3">{{ property.category }}</h6>
 
-        <p class="card-text text-truncate" style="flex-grow: 1;">
-          {{ property.description }}
-        </p>
+          <p class="card-text text-truncate" style="flex-grow: 1">
+            {{ property.description }}
+          </p>
 
-        <ul class="list-unstyled mb-3 small text-secondary">
-          <li>
-            <i class="bi bi-currency-dollar me-2"></i>
-            <strong>Rent:</strong> {{ property.rentAmount }} BDT
-          </li>
-          <li>
-            <i class="bi bi-geo-alt-fill me-2"></i>
-            <strong>Location:</strong>
-            {{ property.section }}, {{ property.thana }}, {{ property.district }}, {{ property.division }}
-          </li>
-          <li>
-            <i class="bi bi-calendar-event me-2"></i>
-            <strong>Available From:</strong> {{ property.availableFrom | date:'longDate' }}
-          </li>
-        </ul>
+          <ul class="list-unstyled mb-3 small text-secondary">
+            <li>
+              <i class="bi bi-currency-dollar me-2"></i>
+              <strong>Rent:</strong> {{ property.rentAmount }} BDT
+            </li>
+            <li>
+              <i class="bi bi-geo-alt-fill me-2"></i>
+              <strong>Location:</strong>
+              {{ property.section }}, {{ property.thana }},
+              {{ property.district }}, {{ property.division }}
+            </li>
+            <li>
+              <i class="bi bi-calendar-event me-2"></i>
+              <strong>Available From:</strong>
+              {{ property.availableFrom | date : "longDate" }}
+            </li>
+          </ul>
 
-        <button
-          class="btn btn-primary mt-auto w-100 fw-semibold"
-          (click)="openModal(property)"
-        >
-          View Details
-        </button>
-      </div>
+          <button
+            class="btn btn-primary mt-auto w-100 fw-semibold"
+            (click)="openModal(property)"
+          >
+            View Details
+          </button>
+        </div>
 
-      <div class="card-footer text-muted text-end fst-italic small">
-        Posted on {{ property.datePosted | date:'mediumDate' }}
+        <div class="card-footer text-muted text-end fst-italic small">
+          Posted on {{ property.datePosted | date : "mediumDate" }}
+        </div>
       </div>
     </div>
   </div>
-</div>
-
 
   <!-- Pagination -->
   <div class="d-flex justify-content-center mt-4">
@@ -157,7 +158,6 @@
 >
   <div class="modal-dialog modal-lg modal-dialog-scrollable">
     <div class="modal-content shadow-lg rounded-3 border-0">
-      
       <div class="modal-header bg-primary text-white rounded-top">
         <h5 class="modal-title fw-bold" id="propertyModalLabel">
           {{ selectedProperty?.title }}
@@ -177,7 +177,7 @@
           class="carousel slide mb-4 rounded-3 shadow-sm"
           data-bs-ride="carousel"
           *ngIf="(selectedProperty?.imageUrls?.length ?? 0) > 0"
-          style="overflow: hidden;"
+          style="overflow: hidden"
         >
           <div class="carousel-inner rounded-3">
             <div
@@ -186,10 +186,10 @@
               [ngClass]="{ active: i === 0 }"
             >
               <img
-                [src]="'http://localhost:8080/api/user/property/image/' + image"
+                [src]="'http://localhost:8080/api/user/image/paths/' + image"
                 class="d-block w-100"
                 alt="Property Image"
-                style="height: 320px; object-fit: cover; border-radius: 0.5rem;"
+                style="height: 320px; object-fit: cover; border-radius: 0.5rem"
               />
             </div>
           </div>
@@ -198,7 +198,7 @@
             type="button"
             data-bs-target="#propertyImageCarousel"
             data-bs-slide="prev"
-            style="width: 3rem;"
+            style="width: 3rem"
           >
             <span class="carousel-control-prev-icon"></span>
           </button>
@@ -207,7 +207,7 @@
             type="button"
             data-bs-target="#propertyImageCarousel"
             data-bs-slide="next"
-            style="width: 3rem;"
+            style="width: 3rem"
           >
             <span class="carousel-control-next-icon"></span>
           </button>
@@ -225,7 +225,7 @@
             src="default-property.jpg"
             alt="Default Property Image"
             class="img-fluid rounded-3 shadow-sm"
-            style="height: 320px; object-fit: cover;"
+            style="height: 320px; object-fit: cover"
           />
         </div>
 
@@ -252,7 +252,9 @@
           </div>
           <div class="col-md-6">
             <strong>Available From:</strong>
-            <p class="mb-0">{{ selectedProperty?.availableFrom | date : "longDate" }}</p>
+            <p class="mb-0">
+              {{ selectedProperty?.availableFrom | date : "longDate" }}
+            </p>
           </div>
           <div class="col-md-6 d-flex align-items-center">
             <strong>Status:</strong>
@@ -262,12 +264,16 @@
                 selectedProperty?.isAvailable ? 'bg-success' : 'bg-secondary'
               "
             >
-              {{ selectedProperty?.isAvailable ? "Available" : "Not Available" }}
+              {{
+                selectedProperty?.isAvailable ? "Available" : "Not Available"
+              }}
             </span>
           </div>
           <div class="col-md-6">
             <strong>Posted Date:</strong>
-            <p class="mb-0">{{ selectedProperty?.datePosted | date : "medium" }}</p>
+            <p class="mb-0">
+              {{ selectedProperty?.datePosted | date : "medium" }}
+            </p>
           </div>
         </div>
       </div>

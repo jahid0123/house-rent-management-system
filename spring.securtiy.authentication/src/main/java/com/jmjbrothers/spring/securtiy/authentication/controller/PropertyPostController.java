@@ -55,7 +55,7 @@ public class PropertyPostController {
 //        }
 //    }
 
-    @GetMapping("/all/posted/property")
+    @GetMapping("/all/posted/properties")
     public ResponseEntity<?> getAllPostedProperty() {
 
         List<GetPostedProperty> allProperty = propertyPostService.getAllPostedProperty();
@@ -85,36 +85,27 @@ public class PropertyPostController {
 
     }
 
-    /*//property Image getting
-    @GetMapping("/property/image/{filename}")
+
+
+
+    @GetMapping("/image/paths/{filename:.+}")
+    @ResponseBody
     public ResponseEntity<Resource> getImage(@PathVariable String filename) {
         try {
-            Path file = Paths.get("uploads", filename);
-            Resource resource = new UrlResource(file.toUri());
+            Path uploadsDir = Paths.get("uploads").toAbsolutePath().normalize();
+            Path filePath = uploadsDir.resolve(filename).normalize();
 
-            if (!resource.exists()) return ResponseEntity.notFound().build();
+            if (!filePath.startsWith(uploadsDir)) {
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).build(); // Security: block path traversal
+            }
 
-            return ResponseEntity.ok()
-                    .contentType(MediaType.IMAGE_JPEG)
-                    .body(resource);
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError().build();
-        }
-    }*/
-
-
-    @GetMapping("/property/image/{filename:.+}")
-    public ResponseEntity<Resource> getImage(@PathVariable String filename) {
-        try {
-            Path file = Paths.get("uploads").resolve(filename).normalize();
-            Resource resource = new UrlResource(file.toUri());
-
+            Resource resource = new UrlResource(filePath.toUri());
             if (!resource.exists() || !resource.isReadable()) {
+                System.out.println("File not found or unreadable: " + filename);
                 return ResponseEntity.notFound().build();
             }
 
-            // Try to determine the content type
-            String contentType = Files.probeContentType(file);
+            String contentType = Files.probeContentType(filePath);
             if (contentType == null) {
                 contentType = "application/octet-stream";
             }
@@ -128,5 +119,6 @@ public class PropertyPostController {
             return ResponseEntity.internalServerError().build();
         }
     }
+
 
 }

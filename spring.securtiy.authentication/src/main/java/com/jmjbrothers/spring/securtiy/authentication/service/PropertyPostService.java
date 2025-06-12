@@ -73,7 +73,7 @@ public class PropertyPostService {
             }
         }
 
-        property.setImagePaths(imagePaths);
+        property.setImageListPaths(imagePaths);
 
         // Deduct credit
         user.setBalanceCredits(user.getBalanceCredits() - 10);
@@ -184,7 +184,7 @@ public class PropertyPostService {
         dto.setDistrict(property.getDistrict());
         dto.setThana(property.getThana());
         dto.setSection(property.getSection());
-        dto.setImageUrls(post.getProperty().getImagePaths());
+        dto.setImageUrls(post.getProperty().getImageListPaths());
 
         return dto;
     }
