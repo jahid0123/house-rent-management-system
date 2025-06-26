@@ -1,10 +1,14 @@
 # Rent House
-A user-friendly digital platform that allows users to search for rental properties — including houses, shops, offices, and more — based on their specific needs and preferences.
-Also user can post their property for rent. Every post unlock cost is 5 credit and Property Post cost is 10 credit. User can buy package for add credit their account balance. User can manage their posted property and unlock post also see their purchase history. Admin can manage everything like Post, User, Package, See total sales amount.  
+Description:
+The Rent House is a full-stack web application where:
+-> House Owners (Landlords) can post properties for rent with images, details, and buy package for recharge credit balance for post. Per property post cost 10 credit.
+-> Renters (Tenants) can browse/filter properties, view image galleries, and unlock properties with the cost of 5 credit to get contact details for contact information.
+-> Admins manage user listings, manage posts, and track rental statistics.
 
-Uses Summary
-• Backend: Java, Spring Boot 3, Spring Security, REST API, JWT, Maven
-• Database: Oracle SQL, JPA/Hibernate
-• Frontend: Angular 19, Bootstrap 5, HTML, CSS, TypeScript
-• Tools: Git, Postman, VS Code, IntelliJ IDEA
+This platform is perfectly suited for educational full-stack development.
 
+Key Objectives: 
+House, office, flat etc. posting with multiple images
+Image preview, edit/delete before submission
+Unlock Property for contact details
+Admin management for property verification and platform stats
