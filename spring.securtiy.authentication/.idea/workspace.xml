@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d4dddb7c-2ade-4416-bcb8-957cb2f2245c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmjbrothers/spring/securtiy/authentication/Application.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmjbrothers/spring/securtiy/authentication/config/JwtAuthFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmjbrothers/spring/securtiy/authentication/config/SecurityConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmjbrothers/spring/securtiy/authentication/constants/Category.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmjbrothers/spring/securtiy/authentication/constants/Role.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmjbrothers/spring/securtiy/authentication/controller/AdminController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmjbrothers/spring/securtiy/authentication/controller/AuthController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmjbrothers/spring/securtiy/authentication/controller/BuyPackageController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmjbrothers/spring/securtiy/authentication/controller/PropertyController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmjbrothers/spring/securtiy/authentication/controller/PropertyPostController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmjbrothers/spring/securtiy/authentication/controller/PropertyUnlockController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmjbrothers/spring/securtiy/authentication/controller/UserController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmjbrothers/spring/securtiy/authentication/dto/BuyPackageDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmjbrothers/spring/securtiy/authentication/dto/GetPostedProperty.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmjbrothers/spring/securtiy/authentication/dto/GetUserInfoDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmjbrothers/spring/securtiy/authentication/dto/LoginRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmjbrothers/spring/securtiy/authentication/dto/MyPostPropertyResponseDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmjbrothers/spring/securtiy/authentication/dto/MyUnlockPropertyDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmjbrothers/spring/securtiy/authentication/dto/PasswordChangeRequestDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmjbrothers/spring/securtiy/authentication/dto/PostedPropertyResponseDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmjbrothers/spring/securtiy/authentication/dto/PropertyDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmjbrothers/spring/securtiy/authentication/dto/PropertyPostDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmjbrothers/spring/securtiy/authentication/dto/PropertyPostUpdateDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmjbrothers/spring/securtiy/authentication/dto/PropertyUnlockDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmjbrothers/spring/securtiy/authentication/dto/PurchaseHistoryDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmjbrothers/spring/securtiy/authentication/dto/RegisterRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmjbrothers/spring/securtiy/authentication/dto/UpdateMyPostedPropertyDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmjbrothers/spring/securtiy/authentication/dto/UserEditDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmjbrothers/spring/securtiy/authentication/dto/UserResponseDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmjbrothers/spring/securtiy/authentication/model/BuyPackage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmjbrothers/spring/securtiy/authentication/model/CreditPackage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmjbrothers/spring/securtiy/authentication/model/Property.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmjbrothers/spring/securtiy/authentication/model/PropertyPost.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmjbrothers/spring/securtiy/authentication/model/PropertyUnlock.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmjbrothers/spring/securtiy/authentication/model/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmjbrothers/spring/securtiy/authentication/model/UserInfoDetails.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmjbrothers/spring/securtiy/authentication/repository/BuyPackageRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmjbrothers/spring/securtiy/authentication/repository/CreditPackageRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmjbrothers/spring/securtiy/authentication/repository/PropertyPostRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmjbrothers/spring/securtiy/authentication/repository/PropertyRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmjbrothers/spring/securtiy/authentication/repository/PropertyUnlockRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmjbrothers/spring/securtiy/authentication/repository/UserRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmjbrothers/spring/securtiy/authentication/service/BuyPackageService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmjbrothers/spring/securtiy/authentication/service/CreditPackageService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmjbrothers/spring/securtiy/authentication/service/JwtService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmjbrothers/spring/securtiy/authentication/service/PropertyPostService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmjbrothers/spring/securtiy/authentication/service/PropertyService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmjbrothers/spring/securtiy/authentication/service/PropertyUnlockService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jmjbrothers/spring/securtiy/authentication/service/UserInfoDetailsService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/jmjbrothers/spring/securtiy/authentication/ApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/00836b6e-79da-49e7-a24c-2b770a626449_ChatGPT Image Jun 5, 2025, 12_22_27 AM.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/01044e90-9d3c-4357-b48e-51ed4b13e4c8_Z.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/03e91a13-9f40-453b-acea-05c655138f24_Screenshot 2025-04-23 234908.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/0668f88c-ccc7-4af4-87c9-bab0aa052c09_ChatGPT Image Jun 5, 2025, 12_25_04 AM.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/070ecfa8-5cdd-4727-8ff6-bd2a58186c29_images.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/073d3e7b-8329-4a3f-b83f-ebeb85db2700_67cd639fd73045.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/09d6037a-9fe6-47e7-8674-6529a68383bc_ChatGPT Image Jun 5, 2025, 12_22_27 AM.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/0d89c885-dcd7-48c0-b33c-b532c30d45e1_67cd639fd73045.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/10ac3da5-299f-4d2a-a616-7cd84a68e367_Z.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/10dd3d61-7f44-423f-b085-0a47a032b6db_ChatGPT Image Jun 5, 2025, 12_25_04 AM.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/10eaac4e-7ace-4467-ae36-8c7c41ee51c4_doctor-explain-coronavirus.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/13971abb-b040-4e88-974b-efdcb12a3175_images.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/15337963-d9a3-4daf-af8e-23f624dd0ca0_1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/16a991ba-2eaa-46b3-8b6e-6e5f56872ac3_ChatGPT Image Jun 5, 2025, 12_22_27 AM.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/1c9e4d20-924d-453f-aaa9-5f16d135e38a_buying-your-first-investment-pro.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/1ea86a7e-5773-40d4-a6c5-997cce07813a_67cd639fd73045.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/25880b06-aa34-4ed0-82fa-8fe5f4cb9f71_az0.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/2623831b-383d-4de4-99e7-3eda2f1a0c44_d086ef0a-92c2-4ca9-9ad9-4b274039a0d8_67cd639fd73045.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/2dce923c-d973-4d8b-ba8b-6e64bb6ad426_Screenshot 2025-04-23 234908.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/2fc9391e-b1ca-46cb-ae20-140e5706b002_Asset-3-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/313d58ca-698e-4906-858d-b25cc687d73d_buying-your-first-investment-pro.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/3ed0d239-f754-4bc8-8d03-f967dd8217a2_2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/41d532cb-c2cb-465d-97e6-204e24ba6105_doctor-explain-coronavirus.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/4555fb31-a847-4cf6-992d-bb41e75d7cfb_buying-your-first-investment-pro.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/4c04fffe-8d26-4752-a6d8-b8750ca2dd9d_images.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/537b8372-2c6f-4b01-8354-def80e005a83_67cd639fd73045.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/55af62be-0789-44aa-837b-509001c494ef_images.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/56616c5c-36ba-4da1-aaf5-aa1e7e18ec64_d860523a-5b15-4092-88f5-c7a7eb50c0e5_images.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/5b546ce6-9c3f-452d-857e-81c6384b54ea_doctor-explain-coronavirus.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/5cca97ae-2d14-45e2-8901-7601082e8493_Screenshot 2025-04-23 234943.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/60e018ad-3ee8-4ef6-a815-a53d58714976_images.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/643be8b7-124b-4e70-b770-abddb4c5ccec_Z.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/66b90d4b-106d-4c2c-a072-f21de398df15_67cd639fd73045.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/6873c78f-2f1d-4afb-bd57-da8507427212_67cd639fd73045.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/68b74c51-5ab8-425f-80ed-7de52f5dd870_images.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/6b24b8c8-4078-4a53-be80-bf97bd771203_Screenshot 2025-04-23 234943.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/6c50492f-001e-4d63-9f8c-17785883903c_Screenshot 2025-04-23 234908.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/6cf5d62a-18e2-4efe-a6d0-61f3a6f8cdf4_616d4404-57bb-4662-9ec2-7a0c05fc88a5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/701c1a8b-5e04-431c-8e37-01b95b138a00_67cd639fd73045.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/795b55e9-70b6-4060-be34-3363793f27f5_Z.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/7bbb18fe-8139-4910-b171-e66f4fec5e87_images.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/84a7a1d6-9473-4700-aeac-278aec1f5092_67cd639fd73045.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/85badd82-1140-4f40-a641-114c8b1ec212_ChatGPT Image Jun 5, 2025, 12_22_27 AM.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/86f22db7-566f-4deb-bd31-b741c589f0e9_Screenshot 2025-04-23 234943.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/897def6f-d799-4944-9c17-d8a01dcfa9c4_67cd639fd73045.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/8ced3f23-9ba3-4901-834d-79c4fe10a33b_ChatGPT Image Jun 5, 2025, 12_22_27 AM.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/8e496c88-2685-4b03-9c58-f11a32b40f86_images.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/8fa19560-3667-4a88-93b5-69d19bb5fae2_20250212_212309.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/93aafbf9-8d74-41b3-9508-926c36c32f5b_67cd639fd73045.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/981da0fc-2777-42da-bbd5-3aefe97b14f0_2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/a08462a4-a082-4f19-bddb-acf84ee455aa_1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/a2dae09f-f838-49b6-90bc-bc1205ff1d80_az0.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/a5149e50-a064-49b8-b3b7-395bad52cc45_1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/a79b5411-f067-4e5e-8362-94f6d34d92ec_Z.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/a7bf4baa-bb27-419e-8255-22a655bc6ac1_buying-your-first-investment-pro.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/b4dcade7-5ce8-4128-bb95-45ac5933a75a_ChatGPT Image Jun 5, 2025, 12_22_27 AM.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/b5926208-3328-4c86-beaa-06f37ec35b61_1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/b75e9b30-4a91-4a85-8e0c-c358790da386_643be8b7-124b-4e70-b770-abddb4c5ccec_Z.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/bb5c2f66-d591-4f94-af24-7caf0c539d4e_67cd639fd73045.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/c2122e71-a863-4908-b563-f67e0098006d_images.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/c21e7602-9b4d-47ae-8157-3baf8c7402c9_ChatGPT Image Jun 5, 2025, 12_22_27 AM.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/c892aaa2-e868-4d54-bacd-98f2b56de2ec_67cd639fd73045.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/cba3e553-6382-4638-bd03-0830c8364962_ChatGPT Image Jun 5, 2025, 12_22_27 AM.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/d086ef0a-92c2-4ca9-9ad9-4b274039a0d8_67cd639fd73045.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/d1c59b43-5c43-41e1-9add-cb1a02dbe553_IMG_9010.JPG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/d860523a-5b15-4092-88f5-c7a7eb50c0e5_images.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/d992ff47-e75c-4589-a6f6-cef20d570a20_2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/da8445d0-d320-4faa-b31e-fa2057a5f0c0_images.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/dbe0c382-c643-498e-be7e-6a55db8cecdb_Asset-3-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/dd19fe37-527d-48b0-b4fe-08b46f348898_ChatGPT Image Jun 5, 2025, 12_22_27 AM.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/e0104730-b17a-45cc-8633-d444b6eff0fb_ChatGPT Image Jun 5, 2025, 12_22_27 AM.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/e03fa3fc-8694-4955-9987-f56d0c0b30a0_ChatGPT Image Jun 5, 2025, 12_25_04 AM.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/e6da5453-8dd0-49c2-b5af-5c4ca6f97146_Z.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/ec71ed85-2bfd-47d6-a763-f91a58d693e8_ChatGPT Image Jun 5, 2025, 12_22_27 AM.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/ee6d4447-df5b-4f7a-accf-290da3ed1ec3_1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/ee8e96b4-480e-4e2b-aabd-606e0a181194_ChatGPT Image Jun 5, 2025, 12_22_27 AM.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/f0853fd4-36ae-4217-b350-4046ceeaf337_Screenshot 2025-04-23 234943 - Copy.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/f6ca2b79-b3f8-4146-8339-2b04c8d60195_images.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/f96ad5ea-780a-4554-99e5-9cc4f9ccb030_67cd639fd73045.jpg" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "jahid0123"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/jahid0123/rent-house.git",
+    "accountId": "881ff83a-d143-41ed-a4d5-565213cfc164"
+  }
+}]]></component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 0
+}]]></component>
+  <component name="ProjectId" id="2z42ujBcmB3DJkV8iGBpZ3gk6uQ" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "main",
+    "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "C:/Git/rent-house/spring.securtiy.authentication",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="spring.securtiy.authentication" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.jmjbrothers.spring.securtiy.authentication.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.26094.121" />
+        <option value="bundled-js-predefined-d6986cc7102b-b26f3e71634d-JavaScript-IU-251.26094.121" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d4dddb7c-2ade-4416-bcb8-957cb2f2245c" name="Changes" comment="" />
+      <created>1750976248902</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1750976248902</updated>
+      <workItem from="1750976250022" duration="64000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
