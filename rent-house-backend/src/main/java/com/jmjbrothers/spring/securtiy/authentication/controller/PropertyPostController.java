@@ -88,6 +88,8 @@ public class PropertyPostController {
 
 
 
+
+    //
     @GetMapping("/image/paths/{filename:.+}")
     @ResponseBody
     public ResponseEntity<Resource> getImage(@PathVariable String filename) {

@@ -220,6 +220,7 @@ public class PropertyPostService {
         myPost.setRoadNumber(propertyPost.getProperty().getRoadNumber());
         myPost.setHouseNumber(propertyPost.getProperty().getHouseNumber());
         myPost.setAddress(propertyPost.getProperty().getAddress());
+        myPost.setImageUrls(propertyPost.getProperty().getImageListPaths());
 
         return myPost;
     }
