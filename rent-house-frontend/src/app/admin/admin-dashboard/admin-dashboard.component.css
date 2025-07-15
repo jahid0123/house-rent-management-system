@@ -1,12 +1,13 @@
-.card-body i {
-  display: block;
-  margin-bottom: 0.5rem;
+.sidebar {
+  width: 250px;
+  min-height: calc(100vh - 64px); /* 64px = navbar height */
+  position: relative;
 }
 
-.card-header {
-  font-size: 1.1rem;
+.hover-bg-light:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
-.list-group-item {
-  font-size: 0.95rem;
+main {
+  overflow-y: auto;
 }

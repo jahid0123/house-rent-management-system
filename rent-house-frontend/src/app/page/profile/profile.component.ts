@@ -88,15 +88,25 @@ export class ProfileComponent implements OnInit {
       };
 
       this.profileService.editUserInfo(updatedData).subscribe({
-        next: (res) => {
+        next: () => {
           alert('Successfully updated!');
-          this.editForm.reset();
-          this.loadUserInfo();
 
-          const modal = Modal.getInstance(
-            document.getElementById('editModal')!
-          );
+          if (this.getUserInfo) {
+            this.getUserInfo.name = name;
+            this.getUserInfo.phone = phone;
+          }
+
+          // ✅ Safe modal close
+          const modalEl = document.getElementById('editModal')!;
+          const modal = Modal.getInstance(modalEl);
           modal?.hide();
+          modalEl.classList.remove('show');
+          document.body.classList.remove('modal-open');
+
+          const backdrops = document.getElementsByClassName('modal-backdrop');
+          while (backdrops.length > 0) {
+            backdrops[0].remove();
+          }
         },
         error: (err) => {
           alert(err.error.message || 'Failed to update user information!');
@@ -128,10 +138,17 @@ export class ProfileComponent implements OnInit {
           alert('Password changed successfully!');
           this.passwordForm.reset();
 
-          const modal = Modal.getInstance(
-            document.getElementById('passwordModal')!
-          );
+          // ✅ Safe modal close and cleanup
+          const modalEl = document.getElementById('passwordModal')!;
+          const modal = Modal.getInstance(modalEl);
           modal?.hide();
+          modalEl.classList.remove('show');
+          document.body.classList.remove('modal-open');
+
+          const backdrops = document.getElementsByClassName('modal-backdrop');
+          while (backdrops.length > 0) {
+            backdrops[0].remove();
+          }
         },
         error: (err) => {
           alert(err.error.message || 'Failed to change password!');

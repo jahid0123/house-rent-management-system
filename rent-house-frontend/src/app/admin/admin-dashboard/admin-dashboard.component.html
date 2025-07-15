@@ -1,5 +1,8 @@
 <nav class="navbar navbar-expand-lg bg-dark px-4 py-3 shadow-sm">
-  <a class="navbar-brand text-white fw-bold d-flex align-items-center fs-4" [routerLink]="['/admin-dashboard/home']">
+  <a
+    class="navbar-brand text-white fw-bold d-flex align-items-center fs-4"
+    [routerLink]="['/admin-dashboard/home']"
+  >
     <i class="bi bi-house-door-fill me-2 fs-3 text-warning"></i>RENT HOUSE
   </a>
 
@@ -15,17 +18,48 @@
     <i class="bi bi-list fs-2"></i>
   </button>
 
-  <div class="collapse navbar-collapse justify-content-between mt-2 mt-lg-0" id="navbarNav">
+  <div
+    class="collapse navbar-collapse justify-content-between mt-2 mt-lg-0"
+    id="navbarNav"
+  >
     <!-- Left menu for ADMIN -->
     <ul class="navbar-nav me-auto">
-      <li class="nav-item" *ngFor="let item of [
-          { route: '/admin-dashboard/dashboard', icon: 'bi-speedometer2', label: 'Dashboard' },
-          { route: '/admin-dashboard/manage-user', icon: 'bi-people-fill', label: 'Manage Users' },
-          { route: '/admin-dashboard/manage-packages', icon: 'bi-boxes', label: 'Manage Packages' },
-          { route: '/admin-dashboard/manage-post', icon: 'bi-file-post', label: 'Manage Post' },
-          { route: '/admin-dashboard/admin-list', icon: 'bi-person-gear', label: 'Admin List' }
-        ]">
-        <a class="nav-link text-white px-3 py-2 rounded fw-medium hover-bg-light" [routerLink]="[item.route]">
+      <li
+        class="nav-item"
+        *ngFor="
+          let item of [
+            {
+              route: '/admin-dashboard/dashboard',
+              icon: 'bi-speedometer2',
+              label: 'Dashboard'
+            },
+            {
+              route: '/admin-dashboard/manage-user',
+              icon: 'bi-people-fill',
+              label: 'Manage Users'
+            },
+            {
+              route: '/admin-dashboard/manage-packages',
+              icon: 'bi-boxes',
+              label: 'Manage Packages'
+            },
+            {
+              route: '/admin-dashboard/manage-post',
+              icon: 'bi-file-post',
+              label: 'Manage Post'
+            },
+            {
+              route: '/admin-dashboard/admin-list',
+              icon: 'bi-person-gear',
+              label: 'Admin List'
+            }
+          ]
+        "
+      >
+        <a
+          class="nav-link text-white px-3 py-2 rounded fw-medium hover-bg-light"
+          [routerLink]="[item.route]"
+        >
           <i class="bi {{ item.icon }} me-2"></i>{{ item.label }}
         </a>
       </li>
@@ -52,9 +86,14 @@
           <span class="d-none d-md-inline fw-semibold">Admin</span>
         </a>
 
-        <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 rounded-3 mt-2">
+        <ul
+          class="dropdown-menu dropdown-menu-end shadow-lg border-0 rounded-3 mt-2"
+        >
           <li>
-            <a class="dropdown-item" [routerLink]="['/admin-dashboard/profile']">
+            <a
+              class="dropdown-item"
+              [routerLink]="['/admin-dashboard/profile']"
+            >
               <i class="bi bi-person-circle me-2"></i>Profile
             </a>
           </li>
